@@ -1,0 +1,23 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "es2018",
+        "module": "ESNext",
+        "allowJs": true,
+        "jsx": "react",
+        "outDir": "./dist",
+        "rootDir": "./",
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "isolatedModules": true,
+        "resolveJsonModule": true,
+        "strict": true,
+        "moduleResolution": "node",
+        "baseUrl": "./src",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "typeRoots": ["./*"]
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
+}

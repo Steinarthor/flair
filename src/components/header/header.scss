@@ -1,0 +1,48 @@
+@import '../../styles/variables';
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.4rem;
+    border-bottom: 1px solid $dark-accent;
+}
+
+.title {
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: $white;
+}
+
+.headerActions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 350px;
+}
+
+.headerNavigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    min-width: 150px;
+    margin-right: 10px;
+}
+
+.navItem {
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: $white;
+    cursor: pointer;
+}
+
+.iconActions {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    cursor: pointer;
+    fill: $white;
+}

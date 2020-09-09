@@ -1,0 +1,38 @@
+@import '../../styles/variables';
+
+.flags {
+    position: relative;
+    display: flex;
+    margin-right: 0.4rem;
+}
+
+.flag {
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+}
+
+.languageList {
+    position: absolute;
+    top: 32px;
+    right: 0px;
+    min-width: 130px;
+    min-height: 100px;
+    background: $dark;
+    border: 1px solid $dark-accent;
+    border-radius: 4px;
+    color: $white;
+}
+
+.language {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.languageText {
+    padding-left: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
