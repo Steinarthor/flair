@@ -21,9 +21,8 @@
     height: 100%;
     border-radius: 4px;
     text-transform: uppercase;
-    transition: color 200ms ease-in-out;
-    font-size: 4rem;
     font-weight: 600;
+    transition: color 200ms ease-in-out;
     cursor: pointer;
 
     span {
@@ -35,12 +34,20 @@
     background-image: url('../../images/film.jpeg');
     background-size: cover;
     background-position-y: center;
+
+    &:hover {
+        color: $green;
+    }
 }
 
 .camera {
     background-image: url('../../images/camera.jpeg');
     background-size: cover;
     background-position-y: center;
+
+    &:hover {
+        color: $pink;
+    }
 }
 
 .music {
@@ -48,6 +55,10 @@
     background-image: url('../../images/music.jpeg');
     background-size: cover;
     background-position-y: center;
+
+    &:hover {
+        color: $darkYellow;
+    }
 }
 
 .art {
@@ -55,6 +66,10 @@
     background-image: url('../../images/art.jpeg');
     background-size: cover;
     background-position-y: center;
+
+    &:hover {
+        color: $lightBlue;
+    }
 }
 
 .design {
@@ -62,6 +77,10 @@
     background-image: url('../../images/design.jpeg');
     background-size: cover;
     background-position-y: center;
+
+    &:hover {
+        color: $red;
+    }
 }
 
 .architecture {
@@ -69,6 +88,10 @@
     background-image: url('../../images/architecture.jpeg');
     background-size: cover;
     background-position-y: center;
+
+    &:hover {
+        color: $yellow;
+    }
 }
 
 .categorySmallBoxes {
@@ -82,8 +105,8 @@
     min-height: 200px;
     border-radius: 4px;
     text-transform: uppercase;
-    font-size: 2rem;
     font-weight: 600;
+    transition: color 200ms ease-in-out;
     cursor: pointer;
 
     span {
@@ -99,4 +122,20 @@
     flex-basis: 60%;
     text-decoration: none;
     color: $white;
+}
+
+@media screen and (min-width: 320px) {
+    .categoryBigBox,
+    .smallBox {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .categoryBigBox {
+        font-size: 4rem;
+    }
+    .smallBox {
+        font-size: 2rem;
+    }
 }
