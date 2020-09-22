@@ -3,7 +3,6 @@
 .flags {
     position: relative;
     display: flex;
-    margin-right: 0.4rem;
 }
 
 .flag {
@@ -16,12 +15,13 @@
     position: absolute;
     top: 32px;
     right: 0px;
-    min-width: 130px;
+    min-width: 150px;
     min-height: 100px;
-    background: $dark;
-    border: 1px solid $dark-accent;
+    background: var(--background-color);
+    border: 1px solid var(--accent);
+    box-shadow: var(--border-shadow);
     border-radius: 4px;
-    color: $white;
+    color: var(--color);
 }
 
 .language {

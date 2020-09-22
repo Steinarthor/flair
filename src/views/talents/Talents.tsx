@@ -1,13 +1,16 @@
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 import { RouteComponentProps } from '@reach/router'
+import Header from '../../components/header/header'
+import styles from './talents.scss'
 
 const Talents: React.FC<RouteComponentProps> = () => {
-    const { t } = useTranslation()
     return (
-        <div>
-            <h1>{t('Talents')}</h1>
-        </div>
+        <>
+            <Header />
+            <main className={styles.talents}>
+                <div>Talents</div>
+            </main>
+        </>
     )
 }
 

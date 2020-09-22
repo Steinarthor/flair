@@ -1,0 +1,102 @@
+@import '../../styles/variables';
+
+.categories {
+    padding: 1.4rem;
+}
+
+.categoryNav {
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+.categoryBoxRow {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.categoryBigBox {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 100%;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transition: color 200ms ease-in-out;
+    font-size: 4rem;
+    font-weight: 600;
+    cursor: pointer;
+
+    span {
+        padding-right: 5px;
+    }
+}
+
+.film {
+    background-image: url('../../images/film.jpeg');
+    background-size: cover;
+    background-position-y: center;
+}
+
+.camera {
+    background-image: url('../../images/camera.jpeg');
+    background-size: cover;
+    background-position-y: center;
+}
+
+.music {
+    margin: 0px 0px 10px 10px;
+    background-image: url('../../images/music.jpeg');
+    background-size: cover;
+    background-position-y: center;
+}
+
+.art {
+    margin-left: 10px;
+    background-image: url('../../images/art.jpeg');
+    background-size: cover;
+    background-position-y: center;
+}
+
+.design {
+    margin: 0px 10px 10px 0px;
+    background-image: url('../../images/design.jpeg');
+    background-size: cover;
+    background-position-y: center;
+}
+
+.architecture {
+    margin-right: 10px;
+    background-image: url('../../images/architecture.jpeg');
+    background-size: cover;
+    background-position-y: center;
+}
+
+.categorySmallBoxes {
+    flex-basis: 40%;
+}
+
+.smallBox {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    min-height: 200px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 600;
+    cursor: pointer;
+
+    span {
+        padding-right: 5px;
+    }
+}
+
+.reverse {
+    flex-direction: row-reverse;
+}
+
+.link {
+    flex-basis: 60%;
+    text-decoration: none;
+    color: $white;
+}

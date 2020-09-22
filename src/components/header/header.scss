@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 1.4rem;
-    border-bottom: 1px solid $dark-accent;
+    box-shadow: var(--border-shadow);
 }
 
 .title {
@@ -13,29 +13,30 @@
     font-size: 2rem;
     font-weight: 900;
     text-transform: uppercase;
-    color: $white;
+    color: var(--color);
 }
 
 .headerActions {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    min-width: 350px;
+
+    svg {
+        margin: 0 0.5rem;
+    }
 }
 
 .headerNavigation {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    min-width: 150px;
-    margin-right: 10px;
 }
 
 .navItem {
+    margin: 0 0.5rem;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
-    color: $white;
+    color: var(--color);
     cursor: pointer;
 }
 
@@ -44,5 +45,5 @@
     justify-content: space-evenly;
     width: 100%;
     cursor: pointer;
-    fill: $white;
+    fill: var(--color);
 }

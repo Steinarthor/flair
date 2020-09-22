@@ -1,6 +1,23 @@
+@import './styles/variables';
+
 .app {
-    height: 100%;
-    font-size: 2rem;
+    color: var(--color);
+}
+
+.light {
+    --background-color: #ffffff;
+    --color: #242526;
+    --border-shadow: 0 5px 10px 0 rgba(0, 64, 128, 0.05);
+    --accent: #ffffff;
+    --project-background-color: #ffffff;
+}
+
+.dark {
+    --background-color: #242526;
+    --color: #ffffff;
+    --accent: #484a4d;
+    --project-background-color: #3a3b3c;
+    --cta: #bb86fc;
 }
 
 .mainSection {

@@ -18,11 +18,11 @@ const Header: React.FC<Props> = () => {
             </Link>
             <div className={styles.headerActions}>
                 <nav className={styles.headerNavigation}>
-                    <Link to="/projects" className={styles.navItem}>
-                        {t('Projects')}
-                    </Link>
                     <Link to="/talents" className={styles.navItem}>
                         {t('Talents')}
+                    </Link>
+                    <Link to="/categories" className={styles.navItem}>
+                        {t('Categories')}
                     </Link>
                 </nav>
                 <LangPicker />

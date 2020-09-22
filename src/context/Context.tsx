@@ -11,15 +11,26 @@ const DispatchContext = React.createContext<Dispatch | undefined>(undefined)
 const contextReducer = (state: State, action: Action) => {
     switch (action.type) {
         case 'SET_THEME':
-            return { theme: action.payload.theme }
+            return {
+                theme: action.payload.theme,
+            }
         default:
             throw new Error(`Unhandled action type ${action.type}`)
     }
 }
 
 const Provider = ({ children }: ProviderProps): JSX.Element => {
+    const theme = localStorage.getItem('theme')
+    const html = document
+        .querySelector('html')
+        ?.setAttribute(
+            'style',
+            `background-color:${
+                theme === 'dark' ? '#242526' : ' #ffffff'
+            }; transition: background-color 100ms ease-in-out`
+        )
     const [state, dispatch] = React.useReducer(contextReducer, {
-        theme: 'dark',
+        theme: theme || 'dark',
     })
     return (
         <StateContext.Provider value={state}>
