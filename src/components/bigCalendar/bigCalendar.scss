@@ -1,0 +1,76 @@
+@import "../../styles/variables";
+
+.calendar {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.weekdays {
+  display: flex;
+  justify-content: space-around;
+
+  span {
+    flex-basis: 14.28%;
+    text-align: center;
+  }
+}
+
+.calendarDays {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.calendarDay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 14.28%;
+  height: 100px;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.calendarNavigation {
+  display: flex;
+  justify-content: space-between;
+  padding: 35px 0;
+
+  button {
+    flex-basis: 14.28%;
+    background: transparent;
+    border: none;
+    color: $white;
+    cursor: pointer;
+  }
+}
+
+.weekday {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.month {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.arrowBack {
+  fill: $white;
+  transform: rotate(180deg);
+}
+
+.arrowForward {
+  fill: $white;
+}
+
+.dateInFuture {
+  color: $gray;
+}
+
+.dateInPast {
+  color: $gray;
+  cursor: not-allowed;
+}

@@ -1,6 +1,7 @@
 import React from 'react'
 import { RouteComponentProps, useParams } from '@reach/router'
 import Header from '../../components/header/header'
+import CategoryFilter from '../../components/categoryFilter/CategoryFilter'
 import styles from './category.scss'
 
 const Category: React.FC<RouteComponentProps> = () => {
@@ -9,7 +10,9 @@ const Category: React.FC<RouteComponentProps> = () => {
     return (
         <>
             <Header />{' '}
-            <main className={styles.category}>{params.category}</main>
+            <main className={styles.category}>
+                <CategoryFilter />
+            </main>
         </>
     )
 }
