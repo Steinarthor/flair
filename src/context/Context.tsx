@@ -1,8 +1,11 @@
 import React from 'react'
 
-type Action = { type: string; payload: Record<string, string> }
+type Action = { type: string; payload: Record<string, any> }
 type Dispatch = (action: Action) => void
-type State = { theme: string }
+type State = {
+    theme: string
+    calendar: { selectedDate: Date; hasSelected: boolean }
+}
 type ProviderProps = { children: React.ReactNode }
 
 const StateContext = React.createContext<State | undefined>(undefined)
@@ -12,7 +15,16 @@ const contextReducer = (state: State, action: Action) => {
     switch (action.type) {
         case 'SET_THEME':
             return {
+                ...state,
                 theme: action.payload.theme,
+            }
+        case 'SET_SELECTED_DAY':
+            return {
+                ...state,
+                calendar: {
+                    selectedDate: action.payload.calendar.selectedDate,
+                    hasSelected: action.payload.calendar.hasSelected,
+                },
             }
         default:
             throw new Error(`Unhandled action type ${action.type}`)
@@ -31,6 +43,10 @@ const Provider = ({ children }: ProviderProps): JSX.Element => {
         )
     const [state, dispatch] = React.useReducer(contextReducer, {
         theme: theme || 'light',
+        calendar: {
+            selectedDate: new Date(0),
+            hasSelected: false,
+        },
     })
     return (
         <StateContext.Provider value={state}>

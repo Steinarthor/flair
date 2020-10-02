@@ -1,76 +1,56 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .calendar {
-  max-width: 1200px;
-  margin: 0 auto;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .weekdays {
-  display: flex;
-  justify-content: space-around;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem;
 
-  span {
-    flex-basis: 14.28%;
-    text-align: center;
-  }
+    span {
+        flex-basis: 14.28%;
+        text-align: center;
+    }
 }
 
 .calendarDays {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
-
-.calendarDay {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-basis: 14.28%;
-  height: 100px;
-  text-align: center;
-  font-size: 1.3rem;
-  font-weight: 600;
-  cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 .calendarNavigation {
-  display: flex;
-  justify-content: space-between;
-  padding: 35px 0;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
 
-  button {
-    flex-basis: 14.28%;
-    background: transparent;
-    border: none;
-    color: $white;
-    cursor: pointer;
-  }
+    button {
+        flex-basis: 14.28%;
+        background: transparent;
+        border: none;
+        color: $white;
+        cursor: pointer;
+    }
 }
 
 .weekday {
-  font-size: 1.3rem;
-  font-weight: 600;
+    font-size: 1.3rem;
+    font-weight: 600;
 }
 
 .month {
-  font-size: 3rem;
-  font-weight: 600;
+    font-size: 3rem;
+    font-weight: 600;
 }
 
 .arrowBack {
-  fill: $white;
-  transform: rotate(180deg);
+    fill: var(--color);
+    transform: rotate(180deg);
 }
 
 .arrowForward {
-  fill: $white;
-}
-
-.dateInFuture {
-  color: $gray;
-}
-
-.dateInPast {
-  color: $gray;
-  cursor: not-allowed;
+    fill: var(--color);
 }

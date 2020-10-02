@@ -11,7 +11,7 @@ const Category: React.FC<RouteComponentProps> = () => {
         <>
             <Header />{' '}
             <main className={styles.category}>
-                <CategoryFilter />
+                <CategoryFilter categoryName="Film" />
             </main>
         </>
     )

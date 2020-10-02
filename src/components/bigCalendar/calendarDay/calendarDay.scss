@@ -1,0 +1,28 @@
+@import '../../../styles/variables';
+
+.calendarDay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 14.28%;
+    height: 100px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.dateInFuture {
+    color: $gray;
+}
+
+.dateInPast {
+    color: $gray;
+    cursor: not-allowed;
+}
+
+.selected {
+    border-radius: 10px;
+    transition: background-color 200ms ease-in-out;
+    background-color: $darkPurple;
+}
