@@ -1,26 +1,32 @@
 import React, { useState } from 'react'
 import { is, enGB } from 'date-fns/locale'
-import { useContext } from '../../context/Context'
-import { addMonths, subMonths, format, getYear, isSameDay } from 'date-fns'
+import {
+    addMonths,
+    subMonths,
+    format,
+    add,
+    sub,
+    getYear,
+    isSameDay,
+} from 'date-fns'
 import { useTranslation } from 'react-i18next'
 import { constructMonthDays, constructWeekDays } from './utils'
 import { DateInMonth } from './calendarDay/types'
 import CalendarDay from './calendarDay/CalendarDay'
 import Arrow from '../../icons/play_arrow-24px.svg'
-import styles from './bigCalendar.scss'
+import styles from './calendar.scss'
 
 const langMap: { [key: string]: Locale } = { is: is, gb: enGB }
 
-const BigCalendar: React.FC = () => {
+const Calendar: React.FC = () => {
     const { i18n } = useTranslation()
-    const context = useContext()
-
     const weekdays = constructWeekDays(i18n.language)
     const datesInMonth = constructMonthDays(new Date())
     const [calendarState, setCalendarState] = useState({
         month: new Date(),
         year: getYear(new Date()),
         calendarDays: datesInMonth,
+        dayInfocus: new Date(),
     })
     const nextMonth = () => {
         const next = addMonths(calendarState.month, 1)
@@ -28,6 +34,7 @@ const BigCalendar: React.FC = () => {
             month: next,
             year: getYear(next),
             calendarDays: constructMonthDays(next),
+            dayInfocus: calendarState.dayInfocus,
         })
     }
     const previousMonth = () => {
@@ -36,11 +43,44 @@ const BigCalendar: React.FC = () => {
             month: prev,
             year: getYear(prev),
             calendarDays: constructMonthDays(prev),
+            dayInfocus: calendarState.dayInfocus,
         })
     }
+    const keyboardNavigation = ({ key }: React.KeyboardEvent) => {
+        switch (key) {
+            case 'ArrowRight':
+                setCalendarState({
+                    ...calendarState,
+                    dayInfocus: add(calendarState.dayInfocus, { days: 1 }),
+                })
+                break
+            case 'ArrowDown':
+                setCalendarState({
+                    ...calendarState,
+                    dayInfocus: add(calendarState.dayInfocus, { days: 7 }),
+                })
+                break
+            case 'ArrowLeft':
+                setCalendarState({
+                    ...calendarState,
+                    dayInfocus: sub(calendarState.dayInfocus, { days: 1 }),
+                })
+                break
+            case 'ArrowUp':
+                setCalendarState({
+                    ...calendarState,
+                    dayInfocus: sub(calendarState.dayInfocus, { days: 7 }),
+                })
+                break
+
+            default:
+                break
+        }
+    }
+
     const { month, year, calendarDays } = calendarState
     return (
-        <div className={styles.calendar} id="calendar">
+        <div className={styles.calendar}>
             <div className={styles.calendarNavigation}>
                 <button onClick={previousMonth}>
                     {' '}
@@ -68,6 +108,11 @@ const BigCalendar: React.FC = () => {
                     <CalendarDay
                         key={`${calendarDay.day.getDate()}-%${index}`}
                         calendarDay={calendarDay}
+                        keyboardNavigation={keyboardNavigation}
+                        inFocus={isSameDay(
+                            calendarDay.day,
+                            calendarState.dayInfocus
+                        )}
                     />
                 ))}
             </div>
@@ -75,4 +120,4 @@ const BigCalendar: React.FC = () => {
     )
 }
 
-export default BigCalendar
+export default Calendar

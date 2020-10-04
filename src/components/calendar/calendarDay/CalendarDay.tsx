@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { Props } from './types'
 import { format, isSameDay } from 'date-fns'
 import { useTranslation } from 'react-i18next'
@@ -10,10 +10,15 @@ const cx = classNames.bind(styles)
 
 const langMap: { [key: string]: Locale } = { is: is, gb: enGB }
 
-const CalendarDay: React.FC<Props> = ({ calendarDay }) => {
+const CalendarDay: React.FC<Props> = ({
+    calendarDay,
+    keyboardNavigation,
+    inFocus,
+}: Props) => {
     const { i18n } = useTranslation()
     const context = useContext()
     const dispatch = useDispatch()
+    const node = useRef<HTMLDivElement>(null)
     const selectDay = () => {
         dispatch({
             type: 'SET_SELECTED_DAY',
@@ -25,8 +30,14 @@ const CalendarDay: React.FC<Props> = ({ calendarDay }) => {
             },
         })
     }
+    useEffect(() => {
+        if (inFocus && node.current !== null) {
+            node.current.focus()
+        }
+    })
     return (
         <div
+            ref={node}
             className={cx('calendarDay', {
                 dateInPast: calendarDay.dateInPast,
                 dateInFuture: calendarDay.dateInFuture,
@@ -35,6 +46,10 @@ const CalendarDay: React.FC<Props> = ({ calendarDay }) => {
                     context.calendar.selectedDate
                 ),
             })}
+            role="button"
+            tabIndex={0}
+            onKeyDown={keyboardNavigation}
+            onKeyPress={selectDay}
             onClick={selectDay}
         >
             <span>

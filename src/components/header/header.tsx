@@ -21,9 +21,6 @@ const Header: React.FC<Props> = () => {
                     <Link to="/talents" className={styles.navItem}>
                         {t('Talents')}
                     </Link>
-                    <Link to="/categories" className={styles.navItem}>
-                        {t('Categories')}
-                    </Link>
                 </nav>
                 <LangPicker />
                 <div className={styles.iconActions}>

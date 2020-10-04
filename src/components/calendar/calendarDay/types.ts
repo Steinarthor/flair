@@ -6,4 +6,6 @@ export interface DateInMonth {
 
 export interface Props {
     calendarDay: DateInMonth
+    inFocus: boolean
+    keyboardNavigation: (event: React.KeyboardEvent) => void
 }

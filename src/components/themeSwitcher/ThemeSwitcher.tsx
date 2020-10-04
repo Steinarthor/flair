@@ -13,7 +13,7 @@ const ThemeSwitcher: React.FC = () => {
             className={styles.themeIcon}
             onClick={() => {
                 dispatch({ type: 'SET_THEME', payload: { theme: 'light' } })
-                const html = document
+                document
                     .querySelector('html')
                     ?.setAttribute(
                         'style',
@@ -27,7 +27,7 @@ const ThemeSwitcher: React.FC = () => {
             className={styles.themeIcon}
             onClick={() => {
                 dispatch({ type: 'SET_THEME', payload: { theme: 'dark' } })
-                const html = document
+                document
                     .querySelector('html')
                     ?.setAttribute(
                         'style',

@@ -1,0 +1,33 @@
+@import '../../../styles/variables';
+
+.eventRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.eventTitle {
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 5px;
+}
+
+.eventPlace,
+.eventDuration {
+    svg {
+        fill: var(--color);
+    }
+}
+
+.eventLocation {
+}
+
+.eventDuration {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 125px;
+    font-size: 1.1rem;
+    font-weight: 400;
+}

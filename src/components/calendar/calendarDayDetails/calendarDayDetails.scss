@@ -1,0 +1,62 @@
+@import '../../../styles/variables';
+
+.calendarDayDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 0;
+    overflow: hidden;
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 600;
+    }
+}
+
+.showDetails {
+    height: auto;
+}
+
+.calendarRow {
+    display: flex;
+    width: 100%;
+    padding: 40px 0;
+    //border-top: 1px solid;
+    //border-bottom: 1px solid;
+}
+
+.calendarRowTime {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 35px;
+    border-right: 1px solid $white;
+    color: $purple;
+}
+
+.calendarRowEvents {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 35px;
+}
+
+.calendarRowWeekday {
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.calendarRowDate {
+    padding: 10px 0;
+    font-size: 3.5rem;
+    font-weight: 400;
+}
+
+.eventTags {
+    display: flex;
+    justify-content: center;
+}

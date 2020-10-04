@@ -9,12 +9,11 @@ import {
     startOfWeek,
     subDays,
 } from 'date-fns'
-import { CalendarDay } from './types'
 import { is, enGB } from 'date-fns/locale'
-
+import { DateInMonth } from '../calendar/calendarDay/types'
 const langMap: { [key: string]: Locale } = { is: is, gb: enGB }
 
-export const constructWeekDays = (locale: string) => {
+export const constructWeekDays = (locale: string): Date[] => {
     let start = startOfWeek(new Date(), {
         weekStartsOn: 0,
         locale: langMap[locale],
@@ -29,16 +28,16 @@ export const constructWeekDays = (locale: string) => {
     return weekdays
 }
 
-export const constructMonthDays = (startDay: Date) => {
+export const constructMonthDays = (startDay: Date): DateInMonth[] => {
     const firstDayOfMonth = startOfMonth(startDay)
     const lastDayOfMonth = endOfMonth(startDay)
     const lastDayOfMonthIndex = getDay(lastDayOfMonth)
     const weekdayStartIndex =
         getDay(firstDayOfMonth) === 0 ? 0 : getDay(firstDayOfMonth) - 1
-    const monthDays: CalendarDay[] = []
+    const monthDays: DateInMonth[] = []
 
     let start = subDays(firstDayOfMonth, weekdayStartIndex)
-    let end = addDays(lastDayOfMonth, 7 - lastDayOfMonthIndex)
+    const end = addDays(lastDayOfMonth, 7 - lastDayOfMonthIndex)
 
     while (isBefore(start, end)) {
         monthDays.push({
