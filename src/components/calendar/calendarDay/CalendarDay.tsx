@@ -2,7 +2,6 @@ import React, { useRef, useEffect } from 'react'
 import { Props } from './types'
 import { format, isSameDay } from 'date-fns'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useContext } from '../../../context/Context'
 import classNames from 'classnames/bind'
 import styles from './calendarDay.scss'
 import { enGB, is } from 'date-fns/locale'
@@ -12,24 +11,14 @@ const langMap: { [key: string]: Locale } = { is: is, gb: enGB }
 
 const CalendarDay: React.FC<Props> = ({
     calendarDay,
+    selectedDay,
     keyboardNavigation,
+    onClick,
     inFocus,
 }: Props) => {
     const { i18n } = useTranslation()
-    const context = useContext()
-    const dispatch = useDispatch()
     const node = useRef<HTMLDivElement>(null)
-    const selectDay = () => {
-        dispatch({
-            type: 'SET_SELECTED_DAY',
-            payload: {
-                calendar: {
-                    selectedDate: calendarDay.day,
-                    hasSelected: true,
-                },
-            },
-        })
-    }
+
     useEffect(() => {
         if (inFocus && node.current !== null) {
             node.current.focus()
@@ -41,16 +30,12 @@ const CalendarDay: React.FC<Props> = ({
             className={cx('calendarDay', {
                 dateInPast: calendarDay.dateInPast,
                 dateInFuture: calendarDay.dateInFuture,
-                selected: isSameDay(
-                    calendarDay.day,
-                    context.calendar.selectedDate
-                ),
+                selected: isSameDay(calendarDay.day, selectedDay),
             })}
             role="button"
             tabIndex={0}
-            onKeyDown={keyboardNavigation}
-            onKeyPress={selectDay}
-            onClick={selectDay}
+            onKeyDown={(event) => keyboardNavigation(event, calendarDay.day)}
+            onClick={() => onClick(calendarDay.day)}
         >
             <span>
                 {format(calendarDay.day, 'd', {

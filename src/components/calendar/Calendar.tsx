@@ -10,6 +10,7 @@ import {
     isSameDay,
 } from 'date-fns'
 import { useTranslation } from 'react-i18next'
+import { useDispatch } from '../../context/Context'
 import { constructMonthDays, constructWeekDays } from './utils'
 import { DateInMonth } from './calendarDay/types'
 import CalendarDay from './calendarDay/CalendarDay'
@@ -22,10 +23,12 @@ const Calendar: React.FC = () => {
     const { i18n } = useTranslation()
     const weekdays = constructWeekDays(i18n.language)
     const datesInMonth = constructMonthDays(new Date())
+    const dispatch = useDispatch()
     const [calendarState, setCalendarState] = useState({
         month: new Date(),
         year: getYear(new Date()),
         calendarDays: datesInMonth,
+        selectedDate: new Date(0),
         dayInfocus: new Date(),
     })
     const nextMonth = () => {
@@ -34,6 +37,7 @@ const Calendar: React.FC = () => {
             month: next,
             year: getYear(next),
             calendarDays: constructMonthDays(next),
+            selectedDate: calendarState.selectedDate,
             dayInfocus: calendarState.dayInfocus,
         })
     }
@@ -43,10 +47,12 @@ const Calendar: React.FC = () => {
             month: prev,
             year: getYear(prev),
             calendarDays: constructMonthDays(prev),
+            selectedDate: calendarState.selectedDate,
             dayInfocus: calendarState.dayInfocus,
         })
     }
-    const keyboardNavigation = ({ key }: React.KeyboardEvent) => {
+    const keyboardNavigation = ({ key }: React.KeyboardEvent, day: Date) => {
+        // BUG: Should limit to add or subtract to the month in view.
         switch (key) {
             case 'ArrowRight':
                 setCalendarState({
@@ -72,13 +78,46 @@ const Calendar: React.FC = () => {
                     dayInfocus: sub(calendarState.dayInfocus, { days: 7 }),
                 })
                 break
+            case 'Enter':
+                setCalendarState({
+                    ...calendarState,
+                    selectedDate: day,
+                    dayInfocus: day,
+                })
+                dispatch({
+                    type: 'SET_SELECTED_DAY',
+                    payload: {
+                        calendar: {
+                            selectedDate: day,
+                            hasSelected: true,
+                        },
+                    },
+                })
+                break
 
             default:
                 break
         }
     }
 
-    const { month, year, calendarDays } = calendarState
+    const selectDay = (day: Date) => {
+        setCalendarState({
+            ...calendarState,
+            selectedDate: day,
+            dayInfocus: day,
+        })
+        dispatch({
+            type: 'SET_SELECTED_DAY',
+            payload: {
+                calendar: {
+                    selectedDate: day,
+                    hasSelected: true,
+                },
+            },
+        })
+    }
+
+    const { month, year, calendarDays, selectedDate } = calendarState
     return (
         <div className={styles.calendar}>
             <div className={styles.calendarNavigation}>
@@ -108,7 +147,9 @@ const Calendar: React.FC = () => {
                     <CalendarDay
                         key={`${calendarDay.day.getDate()}-%${index}`}
                         calendarDay={calendarDay}
+                        selectedDay={selectedDate}
                         keyboardNavigation={keyboardNavigation}
+                        onClick={selectDay}
                         inFocus={isSameDay(
                             calendarDay.day,
                             calendarState.dayInfocus

@@ -8,6 +8,7 @@ const eventRowMocks: EventRowType[] = [
         endTime: add(new Date(), { hours: 4 }),
         place: 'Reykjavík',
         title: 'Javascript meetup',
+        tags: ['Programming', 'Art'],
     },
     {
         type: 'Art',
@@ -15,6 +16,7 @@ const eventRowMocks: EventRowType[] = [
         endTime: add(new Date(), { hours: 5 }),
         place: 'Keflavík',
         title: 'Erró',
+        tags: ['Art'],
     },
     {
         type: 'Programming',
@@ -22,6 +24,7 @@ const eventRowMocks: EventRowType[] = [
         endTime: add(new Date(), { hours: 5 }),
         place: 'Reykjavík',
         title: 'Golang meetup',
+        tags: ['Programming', 'Art'],
     },
     {
         type: 'Sports',
@@ -29,6 +32,7 @@ const eventRowMocks: EventRowType[] = [
         endTime: add(new Date(), { hours: 5 }),
         place: 'Keflavík',
         title: 'Keflavík vs Njarðvík',
+        tags: ['Sports'],
     },
     {
         type: 'Music',
@@ -36,6 +40,7 @@ const eventRowMocks: EventRowType[] = [
         endTime: add(new Date(), { hours: 5 }),
         place: 'Reykjavík',
         title: 'James Blake',
+        tags: ['Music'],
     },
     {
         type: 'Programming',
@@ -43,6 +48,7 @@ const eventRowMocks: EventRowType[] = [
         endTime: add(new Date(), { hours: 8 }),
         place: 'Reykjavík',
         title: 'ReasonML meetup',
+        tags: ['Programming', 'Art'],
     },
 ]
 

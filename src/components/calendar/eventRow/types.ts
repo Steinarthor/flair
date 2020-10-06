@@ -4,6 +4,7 @@ export interface EventRowType {
     endTime: Date
     place: string
     title: string
+    tags: string[]
 }
 
 export interface Props {

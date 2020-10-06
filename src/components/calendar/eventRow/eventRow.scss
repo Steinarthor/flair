@@ -4,30 +4,41 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px;
+    min-height: 150px;
     width: 100%;
+
+    &:not(:first-of-type) {
+        margin-top: 10px;
+    }
 }
 
-.eventTitle {
-    font-size: 1.4rem;
-    font-weight: 500;
-    padding: 5px;
+.eventInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
 .eventPlace,
 .eventDuration {
     svg {
+        position: relative;
+        top: 2px;
+        margin-right: 5px;
         fill: var(--color);
     }
 }
 
-.eventLocation {
+.eventTitle {
+    font-size: 1.4rem;
+    font-weight: 500;
 }
 
-.eventDuration {
+.eventPlace {
+    min-width: 115px;
+}
+
+.eventTags {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-width: 125px;
-    font-size: 1.1rem;
-    font-weight: 400;
 }
