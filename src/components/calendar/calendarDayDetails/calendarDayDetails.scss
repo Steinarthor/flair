@@ -16,6 +16,10 @@
     }
 }
 
+.filterDropDown {
+    margin: 5px 0px 25px 134px;
+}
+
 .showDetails {
     height: auto;
 }
@@ -23,7 +27,7 @@
 .calendarRow {
     display: flex;
     width: 100%;
-    padding: 40px 0;
+    min-height: 900px;
     //border-top: 1px solid;
     //border-bottom: 1px solid;
 }
@@ -40,7 +44,6 @@
 .calendarRowEvents {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     width: 100%;
     padding-left: 35px;
 }

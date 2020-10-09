@@ -17,7 +17,7 @@ const EventRow: React.FC<Props> = ({ eventRow }: Props) => {
     return (
         <div
             className={styles.eventRow}
-            style={{ border: `4px solid ${colorMap[eventRow.type]}` }}
+            style={{ border: `2px solid ${colorMap[eventRow.type]}` }}
         >
             <div className={styles.eventInfo}>
                 <span className={styles.eventTitle}>{eventRow.title}</span>
