@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from '@reach/router'
 import { format } from 'date-fns'
 import { Props } from './types'
-import Tag from '../../tag/Tag'
-import Location from '../../../icons/location_on-24px.svg'
-import Calendar from '../../../icons/calendar_today-24px.svg'
+import Tag from '../tag/Tag'
+import Location from '../../icons/location_on-24px.svg'
+import Calendar from '../../icons/calendar_today-24px.svg'
 import styles from './eventRow.scss'
 
 const colorMap: { [key: string]: string } = {
@@ -15,7 +16,10 @@ const colorMap: { [key: string]: string } = {
 
 const EventRow: React.FC<Props> = ({ eventRow }: Props) => {
     return (
-        <div
+        <Link
+            to={`/${eventRow.place.toLocaleLowerCase()}/${eventRow.type.toLocaleLowerCase()}/${
+                eventRow.slug
+            }`}
             className={styles.eventRow}
             style={{ border: `2px solid ${colorMap[eventRow.type]}` }}
         >
@@ -29,7 +33,7 @@ const EventRow: React.FC<Props> = ({ eventRow }: Props) => {
                     <Calendar />
                     <span>{format(eventRow.startTime, 'HH:m')}</span>
                     <span>-</span>
-                    <span>{format(eventRow.startTime, 'HH:m')}</span>
+                    <span>{format(eventRow.endTime, 'HH:m')}</span>
                 </div>
                 <div className={styles.eventTags}>
                     {eventRow.tags.map((tag: string, index: number) => {
@@ -37,7 +41,7 @@ const EventRow: React.FC<Props> = ({ eventRow }: Props) => {
                     })}
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
 

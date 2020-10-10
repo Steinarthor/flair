@@ -1,4 +1,4 @@
-@import '../../../styles/variables';
+@import '../../styles/variables';
 
 .eventRow {
     display: flex;
@@ -7,6 +7,9 @@
     padding: 10px;
     min-height: 150px;
     width: 100%;
+    text-decoration: none;
+    color: $white;
+    cursor: pointer;
 
     &:not(:first-of-type) {
         margin-top: 10px;

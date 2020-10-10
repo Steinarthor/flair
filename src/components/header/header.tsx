@@ -17,11 +17,13 @@ const Header: React.FC<Props> = () => {
                 Flair
             </Link>
             <div className={styles.headerActions}>
-                <nav className={styles.headerNavigation}>
-                    <Link to="/talents" className={styles.navItem}>
-                        {t('Talents')}
-                    </Link>
-                </nav>
+                {/**
+                 * <nav className={styles.headerNavigation}>
+                        <Link to="/talents" className={styles.navItem}>
+                            {t('Talents')}
+                        </Link>
+                    </nav>
+                 */}
                 <LangPicker />
                 <div className={styles.iconActions}>
                     <ThemeSwitcher />

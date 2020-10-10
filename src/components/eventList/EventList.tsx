@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import { useContext } from '../../../context/Context'
+import { useContext } from '../../context/Context'
 import { format, isToday } from 'date-fns'
 import { EventRowType } from '../eventRow/types'
 import EventRow from '../eventRow/EventRow'
-import FilterDropDown from '../../filterDropdown/FilterDropdown'
+import FilterDropDown from '../filterDropdown/FilterDropdown'
 import eventRowMocks from './mocks'
 import classNames from 'classnames/bind'
-import styles from './calendarDayDetails.scss'
+import styles from './eventList.scss'
 const cx = classNames.bind(styles)
 
-const CalendarDayDetails: React.FC = () => {
+const EventList: React.FC = () => {
     const [eventRows, filterEventRow] = useState<EventRowType[]>(eventRowMocks)
     const context = useContext()
     const constructTagSelection = () => {
@@ -39,7 +39,7 @@ const CalendarDayDetails: React.FC = () => {
 
     return (
         <div
-            className={cx('calendarDayDetails', {
+            className={cx('eventList', {
                 showDetails: context.calendar.hasSelected,
             })}
         >
@@ -49,19 +49,19 @@ const CalendarDayDetails: React.FC = () => {
                     callback={updateEventRow}
                 />
             </div>
-            <div className={styles.calendarRow}>
-                <div className={styles.calendarRowTime}>
-                    <span className={styles.calendarRowWeekday}>
+            <div className={styles.eventRow}>
+                <div className={styles.eventRowTime}>
+                    <span className={styles.eventRowWeekday}>
                         {format(context.calendar.selectedDate, 'EEE')}
                     </span>
-                    <span className={styles.calendarRowDate}>
+                    <span className={styles.eventRowDate}>
                         {format(context.calendar.selectedDate, 'dd')}
                     </span>
                     {isToday(context.calendar.selectedDate) && (
                         <span>Today</span>
                     )}
                 </div>
-                <div className={styles.calendarRowEvents}>
+                <div className={styles.eventRowEvents}>
                     {eventRows.map((mock: EventRowType, index: number) => {
                         return (
                             <EventRow
@@ -75,4 +75,4 @@ const CalendarDayDetails: React.FC = () => {
         </div>
     )
 }
-export default CalendarDayDetails
+export default EventList
