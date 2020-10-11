@@ -38,7 +38,7 @@ const Provider = ({ children }: ProviderProps): JSX.Element => {
         ?.setAttribute(
             'style',
             `background-color:${
-                theme === 'dark' ? '#242526' : '#ffffff'
+                theme === 'dark' ? '#18191a;' : '#ffffff'
             }; transition: background-color 100ms ease-in-out`
         )
     const [state, dispatch] = React.useReducer(contextReducer, {

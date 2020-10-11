@@ -5,6 +5,7 @@ import { Router as ReachRouter } from '@reach/router'
 //const Talents = lazy(() => import('./views/talents/Talents'))
 const Event = lazy(() => import('./views/event/Event'))
 const Home = lazy(() => import('./views/home/Home'))
+const Login = lazy(() => import('./views/login/Login'))
 const NotFound = lazy(() => import('./views/notFound/NotFound'))
 
 const Router: React.FC = () => {
@@ -14,6 +15,7 @@ const Router: React.FC = () => {
                 <ReachRouter style={{ height: '100%' }}>
                     {/*<Talents path="/talents" />*/}
                     <Home path="/" />
+                    <Login path="/login" />
                     <Event path="/:city/:category/:event" />
                     <NotFound default />
                 </ReachRouter>

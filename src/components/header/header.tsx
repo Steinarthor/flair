@@ -29,7 +29,9 @@ const Header: React.FC<Props> = () => {
                     <ThemeSwitcher />
                     <NotificationSvg />
                     <MessageSvg />
-                    <ProfileSvg />
+                    <Link to="/login" className={styles.login}>
+                        <span>Log in</span>
+                    </Link>
                 </div>
             </div>
         </header>
