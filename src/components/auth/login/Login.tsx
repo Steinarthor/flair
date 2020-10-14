@@ -11,7 +11,9 @@ const Login: React.FC<Props> = ({ callback }: Props) => {
     const [loginState, setLoginState] = useState<Auth>({
         email: '',
         password: '',
+        hasSubmitted: false,
     })
+
     const updateLogin = (event: ChangeEvent<HTMLInputElement>) => {
         const newState = {
             ...loginState,
@@ -19,9 +21,17 @@ const Login: React.FC<Props> = ({ callback }: Props) => {
         }
         setLoginState(newState)
     }
+    const onBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(event)
+    }
+
+    const submitLogin = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        setLoginState((state) => ({ ...state, hasSubmitted: true }))
+    }
 
     return (
-        <div className={styles.login}>
+        <form onSubmit={submitLogin} className={styles.login}>
             <div className={styles.loginTypes}>
                 <h1>Welcome</h1>
                 <div className={styles.loginSocial}>
@@ -43,27 +53,29 @@ const Login: React.FC<Props> = ({ callback }: Props) => {
                 <Input
                     name="email"
                     type="string"
+                    required
+                    showError={false}
                     onChange={updateLogin}
+                    onBlur={onBlur}
                     value={loginState.email}
                     placeholder="Email"
                 />
                 <Input
                     name="password"
                     type="password"
+                    required
+                    showError={false}
                     onChange={updateLogin}
+                    onBlur={onBlur}
                     value={loginState.password}
                     placeholder="Password"
                 />
+                <button onClick={callback}>Need an account? Sign up</button>
             </div>
             <div className={styles.loginButton}>
-                <Button id="loginButton" text="Log in" type="button" />
+                <Button id="loginButton" text="Log in" type="submit" />
             </div>
-            {/* 
-                    <div className={styles.loginButton}>
-                      <button onClick={callback}>New account?/button>
-                    </div>   
-                */}
-        </div>
+        </form>
     )
 }
 
