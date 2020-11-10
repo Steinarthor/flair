@@ -14,6 +14,7 @@ import { useDispatch } from '../../context/Context'
 import { constructMonthDays, constructWeekDays } from './utils'
 import { DateInMonth } from './calendarDay/types'
 import CalendarDay from './calendarDay/CalendarDay'
+import CalendarEvents from './calendarEvents/CalendarEvents'
 import Arrow from '../../icons/play_arrow-24px.svg'
 import styles from './calendar.scss'
 
@@ -120,43 +121,53 @@ const Calendar: React.FC = () => {
     const { month, year, calendarDays, selectedDate } = calendarState
     return (
         <div className={styles.calendar}>
-            <div className={styles.calendarNavigation}>
-                <button onClick={previousMonth}>
-                    {' '}
-                    <Arrow className={styles.arrowBack} />
-                </button>
-                <span className={styles.month}>
-                    {format(month, 'MMMM', { locale: langMap[i18n.language] })}{' '}
-                    {year}
-                </span>
-                <button onClick={nextMonth}>
-                    <Arrow className={styles.arrowForward} />
-                </button>
-            </div>
-            <div className={styles.weekdays}>
-                {weekdays.map((weekday) => (
-                    <span key={weekday.getDate()} className={styles.weekday}>
-                        {format(weekday, 'EEE', {
+            <div className={styles.calendarContainer}>
+                <div className={styles.calendarNavigation}>
+                    <button onClick={previousMonth}>
+                        {' '}
+                        <Arrow className={styles.arrowBack} />
+                    </button>
+                    <span className={styles.month}>
+                        {format(month, 'MMMM', {
                             locale: langMap[i18n.language],
-                        })}
+                        })}{' '}
+                        {year}
                     </span>
-                ))}
+                    <button onClick={nextMonth}>
+                        <Arrow className={styles.arrowForward} />
+                    </button>
+                </div>
+                <div className={styles.weekdays}>
+                    {weekdays.map((weekday) => (
+                        <span
+                            key={weekday.getDate()}
+                            className={styles.weekday}
+                        >
+                            {format(weekday, 'EEE', {
+                                locale: langMap[i18n.language],
+                            })}
+                        </span>
+                    ))}
+                </div>
+                <div className={styles.calendarDays}>
+                    {calendarDays.map(
+                        (calendarDay: DateInMonth, index: number) => (
+                            <CalendarDay
+                                key={`${calendarDay.day.getDate()}-%${index}`}
+                                calendarDay={calendarDay}
+                                selectedDay={selectedDate}
+                                keyboardNavigation={keyboardNavigation}
+                                onClick={selectDay}
+                                inFocus={isSameDay(
+                                    calendarDay.day,
+                                    calendarState.dayInfocus
+                                )}
+                            />
+                        )
+                    )}
+                </div>
             </div>
-            <div className={styles.calendarDays}>
-                {calendarDays.map((calendarDay: DateInMonth, index: number) => (
-                    <CalendarDay
-                        key={`${calendarDay.day.getDate()}-%${index}`}
-                        calendarDay={calendarDay}
-                        selectedDay={selectedDate}
-                        keyboardNavigation={keyboardNavigation}
-                        onClick={selectDay}
-                        inFocus={isSameDay(
-                            calendarDay.day,
-                            calendarState.dayInfocus
-                        )}
-                    />
-                ))}
-            </div>
+            <CalendarEvents />
         </div>
     )
 }

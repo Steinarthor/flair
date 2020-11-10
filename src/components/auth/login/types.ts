@@ -3,7 +3,7 @@ export interface Props {
 }
 
 export interface Auth {
-    email: string
+    username: string
     password: string
-    hasSubmitted: boolean
+    message?: string
 }

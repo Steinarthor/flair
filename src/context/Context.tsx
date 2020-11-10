@@ -32,17 +32,25 @@ const contextReducer = (state: State, action: Action) => {
 }
 
 const Provider = ({ children }: ProviderProps): JSX.Element => {
+    /*
     const theme = localStorage.getItem('theme')
     document
         .querySelector('html')
         ?.setAttribute(
             'style',
             `background-color:${
-                theme === 'dark' ? '#18191a;' : '#ffffff'
+                theme === 'dark' ? '#242526;' : '#ffffff'
             }; transition: background-color 100ms ease-in-out`
         )
+    */
+    document
+        .querySelector('html')
+        ?.setAttribute(
+            'style',
+            `background-color:${'#18191a;'}; transition: background-color 100ms ease-in-out`
+        )
     const [state, dispatch] = React.useReducer(contextReducer, {
-        theme: theme || 'light',
+        theme: 'dark',
         calendar: {
             selectedDate: new Date(0),
             hasSelected: false,

@@ -1,5 +1,8 @@
 import React, { ChangeEvent, useState } from 'react'
 import { Props, Auth } from './types'
+import { useNavigate } from '@reach/router'
+import { LOGIN } from '../../../mutations/login'
+import { useMutation } from '@apollo/client'
 import Input from '../../input/Input'
 import Button from '../../button/Button'
 import Facebook from '../../../icons/facebook-app-symbol.svg'
@@ -9,10 +12,12 @@ import styles from './login.scss'
 
 const Login: React.FC<Props> = ({ callback }: Props) => {
     const [loginState, setLoginState] = useState<Auth>({
-        email: '',
+        username: '',
         password: '',
-        hasSubmitted: false,
+        message: '',
     })
+    const navigate = useNavigate()
+    const [login] = useMutation(LOGIN)
 
     const updateLogin = (event: ChangeEvent<HTMLInputElement>) => {
         const newState = {
@@ -21,13 +26,27 @@ const Login: React.FC<Props> = ({ callback }: Props) => {
         }
         setLoginState(newState)
     }
-    const onBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(event)
-    }
 
-    const submitLogin = (event: React.FormEvent<HTMLFormElement>) => {
+    const submitLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        setLoginState((state) => ({ ...state, hasSubmitted: true }))
+        const { data } = await login({
+            variables: {
+                input: {
+                    username: loginState.username,
+                    password: loginState.password,
+                },
+            },
+        })
+
+        if (data.login.status === 201) {
+            localStorage.setItem('token', data.login.token)
+            await navigate('./dashboard', { replace: true })
+        } else {
+            setLoginState((state) => ({
+                ...state,
+                message: data.login.message,
+            }))
+        }
     }
 
     return (
@@ -47,18 +66,18 @@ const Login: React.FC<Props> = ({ callback }: Props) => {
                 </div>
                 <div className={styles.loginSmallText}>
                     <span>Or use your Flair account</span>
+                    <span className={styles.error}>{loginState.message}</span>
                 </div>
             </div>
             <div className={styles.loginInput}>
                 <Input
-                    name="email"
+                    name="username"
                     type="string"
                     required
                     showError={false}
                     onChange={updateLogin}
-                    onBlur={onBlur}
-                    value={loginState.email}
-                    placeholder="Email"
+                    value={loginState.username}
+                    placeholder="Username"
                 />
                 <Input
                     name="password"
@@ -66,7 +85,6 @@ const Login: React.FC<Props> = ({ callback }: Props) => {
                     required
                     showError={false}
                     onChange={updateLogin}
-                    onBlur={onBlur}
                     value={loginState.password}
                     placeholder="Password"
                 />

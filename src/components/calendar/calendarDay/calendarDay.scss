@@ -1,15 +1,26 @@
 @import '../../../styles/variables';
 
 .calendarDay {
+    position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     flex-basis: 14.28%;
-    height: 100px;
     text-align: center;
     font-size: 1.3rem;
     font-weight: 600;
     cursor: pointer;
+
+    &:focus  {
+        outline-width: 1px;
+        outline-style: solid;
+        outline-color: $pink;
+    }
+}
+
+.today {
+    color: $green;
 }
 
 .dateInFuture {
@@ -18,10 +29,25 @@
 
 .dateInPast {
     color: $gray;
+    pointer-events: none;
 }
 
 .selected {
-    border-radius: 10px;
-    //transition: background-color 200ms ease-in-out;
-    background-color: $darkPurple;
+    color: $white;
+
+    &:after {
+        content: '';
+        height: 50px;
+        width: 50px;
+        background-color: $pink;
+        border-radius: 50%;
+        position: absolute;
+        z-index: -1;
+    }
+}
+
+.dayNumber {
+    position: relative;
+    flex-direction: column;
+    padding: 10px;
 }

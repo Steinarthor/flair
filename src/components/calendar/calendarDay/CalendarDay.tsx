@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 import { Props } from './types'
-import { format, isSameDay } from 'date-fns'
+import { format, isBefore, isSameDay, isToday } from 'date-fns'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames/bind'
 import styles from './calendarDay.scss'
@@ -28,16 +28,19 @@ const CalendarDay: React.FC<Props> = ({
         <div
             ref={node}
             className={cx('calendarDay', {
-                dateInPast: calendarDay.dateInPast,
+                dateInPast:
+                    isBefore(calendarDay.day, new Date()) &&
+                    !isToday(calendarDay.day),
                 dateInFuture: calendarDay.dateInFuture,
                 selected: isSameDay(calendarDay.day, selectedDay),
+                today: isToday(calendarDay.day),
             })}
             role="button"
             tabIndex={0}
             onKeyDown={(event) => keyboardNavigation(event, calendarDay.day)}
             onClick={() => onClick(calendarDay.day)}
         >
-            <span>
+            <span className={styles.dayNumber}>
                 {format(calendarDay.day, 'd', {
                     locale: langMap[i18n.language],
                 })}

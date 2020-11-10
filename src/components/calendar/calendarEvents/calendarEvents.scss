@@ -1,0 +1,76 @@
+@import '../../../styles/variables';
+
+.calendarEvents {
+    flex-basis: 25%;
+    height: calc(100vh - 235px);
+    border-radius: 4px;
+    cursor: pointer;
+    overflow-y: scroll;
+}
+
+.event {
+    display: flex;
+    width: 100%;
+    margin: 20px 0;
+    background-color: $dark;
+    border-radius: 4px;
+}
+
+.eventDetails {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.eventTitle {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+.tag {
+    margin-left: 5px;
+    padding: 1px 5px;
+    background-color: $green;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.eventHoast {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 5px 0;
+    color: $pink;
+}
+
+.location {
+    position: relative;
+    padding-left: 20px;
+
+    svg {
+        position: absolute;
+        left: 0;
+        fill: $white;
+    }
+}
+
+.eventTime {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    border-right: 1px solid $gray;
+}
+
+.time {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: $pink;
+}
+
+.duration {
+    font-size: 1.2rem;
+    font-weight: 300;
+}

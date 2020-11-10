@@ -26,7 +26,7 @@ const Header: React.FC<Props> = () => {
                  */}
                 <LangPicker />
                 <div className={styles.iconActions}>
-                    <ThemeSwitcher />
+                    {/*<ThemeSwitcher />*/}
                     <NotificationSvg />
                     <MessageSvg />
                     <Link to="/login" className={styles.login}>

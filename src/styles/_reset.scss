@@ -1,106 +1,52 @@
 *,
-*:before,
-*:after {
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
-html,
+/* Remove default padding */
+ul[class],
+ol[class] {
+    padding: 0;
+}
+
+/* Remove default margin */
 body,
-div,
-span,
-object,
-iframe,
-figure,
 h1,
 h2,
 h3,
 h4,
-h5,
-h6,
 p,
-blockquote,
-pre,
-a,
-code,
-em,
-img,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-b,
-u,
-i,
-ol,
-ul,
+ul[class],
+ol[class],
 li,
-fieldset,
-form,
-label,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-main,
-canvas,
-embed,
-footer,
-header,
-nav,
-section,
-video {
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
     margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    text-size-adjust: none;
 }
 
-footer,
-header,
-nav,
-section,
-main {
-    display: block;
-}
-
-body {
-    line-height: 1;
-}
-
-ol,
-ul {
+// Only remove styling if the list has a class
+ul[class],
+ol[class] {
     list-style: none;
 }
 
-blockquote,
-q {
-    quotes: none;
+a:not([class]) {
+    text-decoration-skip-ink: auto;
 }
 
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-    content: '';
-    content: none;
+// Fluid images
+img {
+    max-width: 100%;
+    display: block;
 }
 
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-input {
-    border-radius: 0;
+input,
+button,
+textarea,
+select {
+    font: inherit;
 }

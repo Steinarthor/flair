@@ -33,7 +33,7 @@ export const constructMonthDays = (startDay: Date): DateInMonth[] => {
     const lastDayOfMonth = endOfMonth(startDay)
     const lastDayOfMonthIndex = getDay(lastDayOfMonth)
     const weekdayStartIndex =
-        getDay(firstDayOfMonth) === 0 ? 0 : getDay(firstDayOfMonth) - 1
+        getDay(firstDayOfMonth) === 0 ? 6 : getDay(firstDayOfMonth) - 1
     const monthDays: DateInMonth[] = []
 
     let start = subDays(firstDayOfMonth, weekdayStartIndex)

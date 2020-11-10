@@ -1,8 +1,10 @@
 @import '../../styles/variables';
 
 .calendar {
-    max-width: 1000px;
-    margin: 20px auto;
+    display: flex;
+    justify-content: space-evenly;
+    flex-basis: 100%;
+    border-radius: 10px;
 }
 
 .weekdays {
@@ -16,10 +18,15 @@
     }
 }
 
+.calendarContainer {
+    flex-basis: 75%;
+}
+
 .calendarDays {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+    height: calc(100vh - 300px);
 }
 
 .calendarNavigation {
@@ -39,6 +46,7 @@
 .weekday {
     font-size: 1.3rem;
     font-weight: 600;
+    color: $darkAccent;
 }
 
 .month {
