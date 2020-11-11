@@ -2,10 +2,19 @@
 
 .calendarEvents {
     flex-basis: 25%;
-    height: calc(100vh - 235px);
+    height: calc(100vh - 110px);
     border-radius: 4px;
     cursor: pointer;
     overflow-y: scroll;
+
+    input {
+        padding: 20px;
+        background-color: $dark;
+        outline: none;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: $white;
+    }
 }
 
 .event {

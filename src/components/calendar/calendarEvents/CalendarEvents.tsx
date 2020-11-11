@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Input from '../../input/Input'
 import Location from '../../../icons/location_on-24px.svg'
 import { addHours, format } from 'date-fns'
 import { mocks } from './mocks'
@@ -17,15 +18,33 @@ const tagMap = {
 }
 
 const CalendarEvents: React.FC = () => {
+    const [filter, updateFilter] = useState<string>('')
+    const filterEvents = (events: Event[]) => {
+        const copy = [...events]
+        const filteredEvents = copy.filter((event: Event) =>
+            event.title.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+        )
+        return filteredEvents
+    }
     return (
         <div className={styles.calendarEvents}>
-            <input />
-            {mocks.map((mock: Event) => {
+            <Input
+                name="Event filter"
+                type="text"
+                value={filter}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    updateFilter(e.target.value)
+                }}
+                placeholder="Filter events"
+                showError={false}
+                required={false}
+            />
+            {filterEvents(mocks).map((mock: Event) => {
                 return (
                     <div key={mock.id} className={styles.event}>
                         <div className={styles.eventTime}>
                             <span className={styles.time}>
-                                {format(mock.time, 'H:m')}
+                                {format(mock.time, 'H:mm')}
                             </span>
                             <span className={styles.duration}>
                                 {format(
