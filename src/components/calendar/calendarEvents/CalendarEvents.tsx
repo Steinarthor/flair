@@ -1,23 +1,12 @@
 import React, { useState } from 'react'
 import Input from '../../input/Input'
 import Location from '../../../icons/location_on-24px.svg'
+import Tag from '../../../components/tag/Tag'
 import { addHours, format } from 'date-fns'
-import { mocks } from './mocks'
-import { Event } from './types'
+import { Event, Props } from './types'
 import styles from './calendarEvents.scss'
 
-const tagMap = {
-    art: '#00b0ff',
-    books: '#ffb300',
-    dance: '#ff1744',
-    film: '#03dac6',
-    'food and drink': '#aa00ff',
-    music: '#536dfe',
-    programming: '#e17055',
-    sports: '#ff57bb',
-}
-
-const CalendarEvents: React.FC = () => {
+const CalendarEvents: React.FC<Props> = ({ events }: Props) => {
     const [filter, updateFilter] = useState<string>('')
     const filterEvents = (events: Event[]) => {
         const copy = [...events]
@@ -26,6 +15,7 @@ const CalendarEvents: React.FC = () => {
         )
         return filteredEvents
     }
+
     return (
         <div className={styles.calendarEvents}>
             <Input
@@ -39,42 +29,40 @@ const CalendarEvents: React.FC = () => {
                 showError={false}
                 required={false}
             />
-            {filterEvents(mocks).map((mock: Event) => {
-                return (
-                    <div key={mock.id} className={styles.event}>
-                        <div className={styles.eventTime}>
-                            <span className={styles.time}>
-                                {format(mock.time, 'H:mm')}
-                            </span>
-                            <span className={styles.duration}>
-                                {format(
-                                    addHours(mock.time, mock.duration),
-                                    'HH:mm'
-                                )}
-                            </span>
-                        </div>
-                        <div className={styles.eventDetails}>
-                            <span className={styles.eventTitle}>
-                                {mock.title}
-                                <span
-                                    className={styles.tag}
-                                    style={{
-                                        backgroundColor: tagMap[mock.category],
-                                    }}
-                                >
-                                    {mock.category}
+            <div className={styles.calendarEventsContainer}>
+                {filterEvents(events).map((event: Event) => {
+                    return (
+                        <div key={event.id} className={styles.event}>
+                            <div className={styles.eventTime}>
+                                <span className={styles.time}>
+                                    {format(new Date(event.time), 'H:mm')}
                                 </span>
-                            </span>
-                            <span className={styles.eventHoast}>
-                                {mock.hoast}
-                            </span>
-                            <span className={styles.location}>
-                                <Location /> {mock.location}
-                            </span>
+                                <span className={styles.duration}>
+                                    {format(
+                                        addHours(
+                                            new Date(event.time),
+                                            event.duration
+                                        ),
+                                        'HH:mm'
+                                    )}
+                                </span>
+                            </div>
+                            <div className={styles.eventDetails}>
+                                <span className={styles.eventTitle}>
+                                    {event.title}
+                                    <Tag category={event.category} />
+                                </span>
+                                <span className={styles.eventHoast}>
+                                    {event.hoast}
+                                </span>
+                                <span className={styles.location}>
+                                    <Location /> {event.location}
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                )
-            })}
+                    )
+                })}
+            </div>
         </div>
     )
 }

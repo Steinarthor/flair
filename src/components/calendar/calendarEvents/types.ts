@@ -1,17 +1,23 @@
+export type Category =
+    | 'art'
+    | 'books'
+    | 'dance'
+    | 'film'
+    | 'food and drink'
+    | 'music'
+    | 'programming'
+    | 'sports'
+
 export interface Event {
     id: number
     title: string
     hoast: string
-    time: number
+    time: string
     duration: number
-    category:
-        | 'art'
-        | 'books'
-        | 'dance'
-        | 'film'
-        | 'food and drink'
-        | 'music'
-        | 'programming'
-        | 'sports'
+    category: Category
     location: string
+}
+
+export interface Props {
+    events: Event[]
 }

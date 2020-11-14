@@ -2,9 +2,6 @@ import React, { ChangeEvent, useState } from 'react'
 import { Props, Auth } from './types'
 import Input from '../../input/Input'
 import Button from '../../button/Button'
-import Facebook from '../../../icons/facebook-app-symbol.svg'
-import Google from '../../../icons/google-plus.svg'
-import Twitter from '../../../icons/twitter.svg'
 import styles from './signup.scss'
 
 const Signup: React.FC<Props> = ({ callback }: Props) => {
@@ -35,20 +32,6 @@ const Signup: React.FC<Props> = ({ callback }: Props) => {
         <form onSubmit={submitSignup} className={styles.signup}>
             <div className={styles.signupTypes}>
                 <h1>Welcome</h1>
-                <div className={styles.signupSocial}>
-                    <button>
-                        <Facebook /> <span>Facebook</span>
-                    </button>
-                    <button>
-                        <Google /> <span>Google</span>
-                    </button>
-                    <button>
-                        <Twitter /> <span>Twitter</span>
-                    </button>
-                </div>
-                <div className={styles.signupSmallText}>
-                    <span>Or use your Flair account</span>
-                </div>
             </div>
             <div className={styles.signupInput}>
                 <Input
@@ -81,7 +64,9 @@ const Signup: React.FC<Props> = ({ callback }: Props) => {
                     value={signupState.password}
                     placeholder="Password"
                 />
-                <button onClick={callback}>Already have an account? Sign in</button>
+                <button onClick={callback}>
+                    Already have an account? Sign in
+                </button>
             </div>
             <div className={styles.signupButton}>
                 <Button id="signUpButton" text="Sign up" type="submit" />

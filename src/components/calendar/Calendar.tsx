@@ -9,18 +9,37 @@ import {
     getYear,
     isSameDay,
 } from 'date-fns'
+import { useQuery } from '@apollo/client'
+import { EVENTS } from '../../queries/events'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from '../../context/Context'
 import { constructMonthDays, constructWeekDays } from './utils'
 import { DateInMonth } from './calendarDay/types'
+import { Event, Category } from './calendarEvents/types'
 import CalendarDay from './calendarDay/CalendarDay'
 import CalendarEvents from './calendarEvents/CalendarEvents'
+import Tag from '../tag/Tag'
 import Arrow from '../../icons/play_arrow-24px.svg'
 import styles from './calendar.scss'
 
 const langMap: { [key: string]: Locale } = { is: is, gb: enGB }
+const uniqueTags = (events: Event[]): Category[] => {
+    const uniqueTag = new Set<Category>()
+
+    for (const event of events) {
+        if (uniqueTag.has(event.category)) {
+            continue
+        } else {
+            uniqueTag.add(event.category)
+        }
+    }
+    return [...uniqueTag]
+}
 
 const Calendar: React.FC = () => {
+    const { loading, error, data } = useQuery(EVENTS, {
+        pollInterval: 500,
+    })
     const { i18n } = useTranslation()
     const weekdays = constructWeekDays(i18n.language)
     const datesInMonth = constructMonthDays(new Date())
@@ -119,8 +138,24 @@ const Calendar: React.FC = () => {
     }
 
     const { month, year, calendarDays, selectedDate } = calendarState
+
+    if (loading) {
+        return <div>...Loading</div>
+    }
+
+    if (error) {
+        console.error(error)
+        return <div>Something wrong happent</div>
+    }
+
     return (
         <div className={styles.calendar}>
+            <div className={styles.filterBy}>
+                <span className={styles.filterByTitle}>Filter by</span>
+                {uniqueTags(data.events).map((category: Category) => (
+                    <Tag key={category} category={category} />
+                ))}
+            </div>
             <div className={styles.calendarContainer}>
                 <div className={styles.calendarNavigation}>
                     <button onClick={previousMonth}>
@@ -167,7 +202,7 @@ const Calendar: React.FC = () => {
                     )}
                 </div>
             </div>
-            <CalendarEvents />
+            <CalendarEvents events={data.events} />
         </div>
     )
 }
