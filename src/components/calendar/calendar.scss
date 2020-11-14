@@ -19,11 +19,9 @@
 }
 
 .calendarContainer {
-    flex-basis: 55%;
+    flex-basis: 65%;
     margin: 0 20px;
     padding: 10px;
-    border: 1px solid $gray;
-    border-radius: 4px;
 }
 
 .calendarDays {
@@ -78,10 +76,4 @@
         line-height: 30px;
         cursor: pointer;
     }
-}
-
-.filterByTitle {
-    margin-top: 0;
-    font-size: 1.2rem;
-    font-weight: 600;
 }

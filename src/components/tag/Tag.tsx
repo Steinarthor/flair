@@ -13,17 +13,31 @@ const tagMap = {
     sports: '#ff57bb',
 }
 
-const Tag: React.FC<Props> = ({ category }: Props) => {
-    return (
-        <span
-            className={styles.tag}
-            style={{
-                backgroundColor: tagMap[category],
-            }}
-        >
-            {category}
-        </span>
-    )
+const Tag: React.FC<Props> = ({ invert, category }: Props) => {
+    if (invert) {
+        return (
+            <span
+                className={styles.tag}
+                style={{
+                    border: `1px solid ${tagMap[category]}`,
+                    color: tagMap[category],
+                }}
+            >
+                {category}
+            </span>
+        )
+    } else {
+        return (
+            <span
+                className={styles.tag}
+                style={{
+                    backgroundColor: tagMap[category],
+                }}
+            >
+                {category}
+            </span>
+        )
+    }
 }
 
 export default Tag
