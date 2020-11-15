@@ -13,15 +13,32 @@ const tagMap = {
     sports: '#ff57bb',
 }
 
-const Tag: React.FC<Props> = ({ invert, category }: Props) => {
+const Tag: React.FC<Props> = ({
+    invert,
+    category,
+    isSelected,
+    handleClick,
+    onKeyPress,
+}: Props) => {
     if (invert) {
         return (
             <span
                 className={styles.tag}
                 style={{
                     border: `1px solid ${tagMap[category]}`,
-                    color: tagMap[category],
+                    backgroundColor: isSelected
+                        ? tagMap[category]
+                        : 'transparent',
+                    color: isSelected ? '#fff' : tagMap[category],
                 }}
+                onClick={() => {
+                    handleClick && handleClick(category)
+                }}
+                onKeyPress={() => {
+                    onKeyPress && onKeyPress(category)
+                }}
+                role="button"
+                tabIndex={0}
             >
                 {category}
             </span>

@@ -15,21 +15,43 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch } from '../../context/Context'
 import { constructMonthDays, constructWeekDays } from './utils'
 import { DateInMonth } from './calendarDay/types'
+import { Event, Category } from './calendarEvents/types'
 import CalendarDay from './calendarDay/CalendarDay'
 import CalendarEvents from './calendarEvents/CalendarEvents'
 import Arrow from '../../icons/play_arrow-24px.svg'
 import styles from './calendar.scss'
 
 const langMap: { [key: string]: Locale } = { is: is, gb: enGB }
+const tags = new Set<Category>()
+
+const uniqueTags = (events: Event[]): Category[] => {
+    const uniqueTag = new Set<Category>()
+
+    for (const event of events) {
+        if (uniqueTag.has(event.category)) {
+            continue
+        } else {
+            uniqueTag.add(event.category)
+        }
+    }
+    return [...uniqueTag]
+}
 
 const Calendar: React.FC = () => {
+    const [filterEventsByTag, toggleEventsByTag] = useState<Event[]>([])
     const { loading, error, data } = useQuery(EVENTS, {
         pollInterval: 500,
+        onCompleted: (data) => {
+            toggleEventsByTag(data.events)
+            setEventTags(uniqueTags(data.events))
+        },
     })
     const { i18n } = useTranslation()
     const weekdays = constructWeekDays(i18n.language)
     const datesInMonth = constructMonthDays(new Date())
     const dispatch = useDispatch()
+    const [selectedTags, selectTag] = useState<Category[]>([])
+    const [eventTags, setEventTags] = useState<Category[]>([])
     const [calendarState, setCalendarState] = useState({
         month: new Date(),
         year: getYear(new Date()),
@@ -123,6 +145,23 @@ const Calendar: React.FC = () => {
         })
     }
 
+    const handleTagSelection = (category: Category) => {
+        if (tags.has(category) && tags.size > 0) {
+            tags.delete(category)
+        } else {
+            tags.add(category)
+        }
+        const filterDataByTag = data.events.filter((event: Event) =>
+            tags.has(event.category)
+        )
+        selectTag([...tags])
+        toggleEventsByTag(filterDataByTag)
+
+        if (tags.size === 0) {
+            toggleEventsByTag(data.events)
+        }
+    }
+
     const { month, year, calendarDays, selectedDate } = calendarState
 
     if (loading) {
@@ -182,7 +221,12 @@ const Calendar: React.FC = () => {
                     )}
                 </div>
             </div>
-            <CalendarEvents events={data.events} />
+            <CalendarEvents
+                events={filterEventsByTag}
+                eventTags={eventTags}
+                handleTagSelection={handleTagSelection}
+                selectedTags={selectedTags}
+            />
         </div>
     )
 }

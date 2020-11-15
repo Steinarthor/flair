@@ -20,4 +20,7 @@ export interface Event {
 
 export interface Props {
     events: Event[]
+    handleTagSelection: (category: Category) => void
+    selectedTags: Category[]
+    eventTags: Category[]
 }

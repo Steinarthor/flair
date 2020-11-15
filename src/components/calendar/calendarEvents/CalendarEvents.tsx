@@ -6,20 +6,12 @@ import { addHours, format } from 'date-fns'
 import { Event, Category, Props } from './types'
 import styles from './calendarEvents.scss'
 
-const uniqueTags = (events: Event[]): Category[] => {
-    const uniqueTag = new Set<Category>()
-
-    for (const event of events) {
-        if (uniqueTag.has(event.category)) {
-            continue
-        } else {
-            uniqueTag.add(event.category)
-        }
-    }
-    return [...uniqueTag]
-}
-
-const CalendarEvents: React.FC<Props> = ({ events }: Props) => {
+const CalendarEvents: React.FC<Props> = ({
+    events,
+    handleTagSelection,
+    selectedTags,
+    eventTags,
+}: Props) => {
     const [filter, updateFilter] = useState<string>('')
     const filterEvents = (events: Event[]) => {
         const copy = [...events]
@@ -45,8 +37,16 @@ const CalendarEvents: React.FC<Props> = ({ events }: Props) => {
                 />
                 <div className={styles.filterBy}>
                     <div className={styles.filterTags}>
-                        {uniqueTags(events).map((category: Category) => (
-                            <Tag key={category} category={category} invert />
+                        {eventTags.map((category: Category) => (
+                            <Tag
+                                key={category}
+                                category={category}
+                                invert
+                                handleClick={(category) =>
+                                    handleTagSelection(category)
+                                }
+                                isSelected={selectedTags.includes(category)}
+                            />
                         ))}
                     </div>
                 </div>
