@@ -11,12 +11,7 @@
     font-size: 1.3rem;
     font-weight: 600;
     cursor: pointer;
-
-    &:focus  {
-        outline-width: 1px;
-        outline-style: solid;
-        outline-color: $pink;
-    }
+    outline: 0; // Just trying out few things. Not optimal to do this, find another style or remove this.
 }
 
 .today {

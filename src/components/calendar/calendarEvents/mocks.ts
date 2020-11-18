@@ -3,7 +3,7 @@ export const mocks: Event[] = [
     {
         id: 1,
         title: 'JavaScript meetup',
-        hoast: 'Steinar Þór Oddsson',
+        host: 'Steinar Þór Oddsson',
         time: Date.now(),
         duration: 1,
         category: 'programming',
@@ -12,7 +12,7 @@ export const mocks: Event[] = [
     {
         id: 2,
         title: 'James Blake',
-        hoast: 'Iceland Airwaves',
+        host: 'Iceland Airwaves',
         time: Date.now(),
         duration: 1.5,
         category: 'music',
@@ -21,7 +21,7 @@ export const mocks: Event[] = [
     {
         id: 3,
         title: 'Star Wars Premiere',
-        hoast: 'Disney',
+        host: 'Disney',
         time: Date.now(),
         duration: 3,
         category: 'film',
@@ -30,7 +30,7 @@ export const mocks: Event[] = [
     {
         id: 4,
         title: 'Pina Bausch Vollmond',
-        hoast: 'Baiba Vanaga',
+        host: 'Baiba Vanaga',
         time: Date.now(),
         duration: 1,
         category: 'dance',
@@ -39,7 +39,7 @@ export const mocks: Event[] = [
     {
         id: 5,
         title: 'X Games',
-        hoast: 'Steinar Þór Oddsson',
+        host: 'Steinar Þór Oddsson',
         time: Date.now(),
         duration: 1.5,
         category: 'sports',
@@ -48,7 +48,7 @@ export const mocks: Event[] = [
     {
         id: 6,
         title: 'Noam Chomsky book signing',
-        hoast: 'Goodreads',
+        host: 'Goodreads',
         time: Date.now(),
         duration: 0.5,
         category: 'books',
@@ -57,7 +57,7 @@ export const mocks: Event[] = [
     {
         id: 7,
         title: 'A$AP Rocky tour',
-        hoast: 'New York Music',
+        host: 'New York Music',
         time: Date.now(),
         duration: 2.5,
         category: 'music',
@@ -66,7 +66,7 @@ export const mocks: Event[] = [
     {
         id: 8,
         title: 'Vine tasting',
-        hoast: 'Vine & Co',
+        host: 'Vine & Co',
         time: Date.now(),
         duration: 3,
         category: 'food and drink',
@@ -75,7 +75,7 @@ export const mocks: Event[] = [
     {
         id: 9,
         title: 'Beer meetup',
-        hoast: 'Elmar Geir',
+        host: 'Elmar Geir',
         time: Date.now(),
         duration: 2,
         category: 'food and drink',
@@ -84,7 +84,7 @@ export const mocks: Event[] = [
     {
         id: 10,
         title: 'Eddward Hopper The Nighthawks',
-        hoast: 'Reykjavík Art Festival',
+        host: 'Reykjavík Art Festival',
         time: Date.now(),
         duration: 0,
         category: 'art',

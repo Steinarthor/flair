@@ -11,7 +11,7 @@ export type Category =
 export interface Event {
     id: number
     title: string
-    hoast: string
+    host: string
     time: string
     duration: number
     category: Category

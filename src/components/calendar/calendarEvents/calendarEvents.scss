@@ -33,6 +33,11 @@
     overflow-y: scroll;
 }
 
+.eventLink {
+    text-decoration: none;
+    color: inherit;
+}
+
 .event {
     display: flex;
     width: 100%;

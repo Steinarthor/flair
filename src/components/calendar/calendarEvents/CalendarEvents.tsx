@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Input from '../../input/Input'
 import Location from '../../../icons/location_on-24px.svg'
 import Tag from '../../../components/tag/Tag'
+import { Link } from '@reach/router'
 import { addHours, format } from 'date-fns'
 import { Event, Category, Props } from './types'
 import styles from './calendarEvents.scss'
@@ -20,7 +21,13 @@ const CalendarEvents: React.FC<Props> = ({
         )
         return filteredEvents
     }
-
+    const formatText = (text: string): string =>
+        text.split(' ').join('-').toLocaleLowerCase()
+    const constructEventLink = (event: Event): string => {
+        return `${formatText(event.location)}/${formatText(
+            event.category
+        )}/${formatText(event.title)}`
+    }
     return (
         <div className={styles.calendarEvents}>
             <div className={styles.eventFilter}>
@@ -53,38 +60,46 @@ const CalendarEvents: React.FC<Props> = ({
             </div>
             <div className={styles.calendarEventsContainer}>
                 {filterEvents(events).map((event: Event) => {
+                    constructEventLink(event)
                     return (
-                        <div key={event.id} className={styles.event}>
-                            <div className={styles.eventTime}>
-                                <span className={styles.time}>
-                                    {format(new Date(event.time), 'H:mm')}
-                                </span>
-                                <span className={styles.duration}>
-                                    {format(
-                                        addHours(
-                                            new Date(event.time),
-                                            event.duration
-                                        ),
-                                        'HH:mm'
-                                    )}
-                                </span>
+                        <Link
+                            key={event.id}
+                            to={constructEventLink(event)}
+                            state={{ id: event.id }}
+                            className={styles.eventLink}
+                        >
+                            <div className={styles.event}>
+                                <div className={styles.eventTime}>
+                                    <span className={styles.time}>
+                                        {format(new Date(event.time), 'H:mm')}
+                                    </span>
+                                    <span className={styles.duration}>
+                                        {format(
+                                            addHours(
+                                                new Date(event.time),
+                                                event.duration
+                                            ),
+                                            'HH:mm'
+                                        )}
+                                    </span>
+                                </div>
+                                <div className={styles.eventDetails}>
+                                    <span className={styles.eventTitle}>
+                                        {event.title}
+                                        <Tag
+                                            category={event.category}
+                                            invert={false}
+                                        />
+                                    </span>
+                                    <span className={styles.eventHoast}>
+                                        {event.host}
+                                    </span>
+                                    <span className={styles.location}>
+                                        <Location /> {event.location}
+                                    </span>
+                                </div>
                             </div>
-                            <div className={styles.eventDetails}>
-                                <span className={styles.eventTitle}>
-                                    {event.title}
-                                    <Tag
-                                        category={event.category}
-                                        invert={false}
-                                    />
-                                </span>
-                                <span className={styles.eventHoast}>
-                                    {event.hoast}
-                                </span>
-                                <span className={styles.location}>
-                                    <Location /> {event.location}
-                                </span>
-                            </div>
-                        </div>
+                        </Link>
                     )
                 })}
             </div>

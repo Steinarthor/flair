@@ -9,6 +9,9 @@ const PrivateRoute = lazy(
 const Dashboard = lazy(() => import('./views/dashboard/Dashboard'))
 const Home = lazy(() => import('./views/home/Home'))
 const Login = lazy(() => import('./views/login/Login'))
+const Event = lazy(() => import('./views/event/Event'))
+const Location = lazy(() => import('./views/location/Location'))
+const Category = lazy(() => import('./views/category/Category'))
 const NotFound = lazy(() => import('./views/notFound/NotFound'))
 
 const Router: React.FC = () => {
@@ -19,6 +22,9 @@ const Router: React.FC = () => {
                     {/*<Talents path="/talents" />*/}
                     <Home path="/" />
                     <Login path="/login" />
+                    <Location path="/:location" />
+                    <Category path="/:location/:category" />
+                    <Event path="/:location/:category/:event" />
                     <PrivateRoute as={Dashboard} path="/dashboard" />
                     <NotFound default />
                 </ReachRouter>
