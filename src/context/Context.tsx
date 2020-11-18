@@ -4,6 +4,7 @@ type Action = { type: string; payload: Record<string, any> }
 type Dispatch = (action: Action) => void
 type State = {
     theme: string
+    location: string
     calendar: { selectedDate: Date; hasSelected: boolean }
 }
 type ProviderProps = { children: React.ReactNode }
@@ -17,6 +18,11 @@ const contextReducer = (state: State, action: Action) => {
             return {
                 ...state,
                 theme: action.payload.theme,
+            }
+        case 'SET_LOCATION':
+            return {
+                ...state,
+                location: action.payload.location,
             }
         case 'SET_SELECTED_DAY':
             return {
@@ -51,6 +57,7 @@ const Provider = ({ children }: ProviderProps): JSX.Element => {
         )
     const [state, dispatch] = React.useReducer(contextReducer, {
         theme: 'dark',
+        location: JSON.parse(localStorage.getItem('location') || ''),
         calendar: {
             selectedDate: new Date(0),
             hasSelected: false,

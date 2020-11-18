@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from '@reach/router'
 import { useTranslation } from 'react-i18next'
 import { Props } from './types'
+import LocationPicker from '../../components/locationPicker/LocationPicker'
 import LangPicker from '../../components/langpicker/LangPicker'
 import ThemeSwitcher from '../../components/themeSwitcher/ThemeSwitcher'
 import ProfileSvg from '../../icons/account_circle-24px.svg'
@@ -24,6 +25,7 @@ const Header: React.FC<Props> = () => {
                         </Link>
                     </nav>
                  */}
+                <LocationPicker />
                 <LangPicker />
                 <div className={styles.iconActions}>
                     {/*<ThemeSwitcher />*/}

@@ -1,0 +1,41 @@
+@import '../../styles/variables';
+
+.location {
+    position: relative;
+    display: flex;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.locationList {
+    position: absolute;
+    top: 32px;
+    right: 0px;
+    min-width: 150px;
+    min-height: 100px;
+    background: var(--background-color);
+    border: 1px solid var(--accent);
+    box-shadow: var(--border-shadow);
+    border-radius: 4px;
+    color: var(--color);
+    z-index: 1;
+}
+
+.locationItem {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+
+    transition: background-color 100ms ease-in-out;
+
+    &:hover {
+        background-color: $purple;
+    }
+}
+
+.locationText {
+    padding-left: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}

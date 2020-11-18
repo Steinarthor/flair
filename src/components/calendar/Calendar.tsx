@@ -12,7 +12,7 @@ import {
 import { useQuery } from '@apollo/client'
 import { EVENTS } from '../../queries/events'
 import { useTranslation } from 'react-i18next'
-import { useDispatch } from '../../context/Context'
+import { useContext, useDispatch } from '../../context/Context'
 import { constructMonthDays, constructWeekDays } from './utils'
 import { DateInMonth } from './calendarDay/types'
 import { Event, Category } from './calendarEvents/types'
@@ -38,9 +38,13 @@ const uniqueTags = (events: Event[]): Category[] => {
 }
 
 const Calendar: React.FC = () => {
+    const context = useContext()
+    const dispatch = useDispatch()
     const [filterEventsByTag, toggleEventsByTag] = useState<Event[]>([])
+
     const { loading, error, data } = useQuery(EVENTS, {
         pollInterval: 500,
+        variables: { location: context.location },
         onCompleted: (data) => {
             toggleEventsByTag(data.events)
             setEventTags(uniqueTags(data.events))
@@ -49,7 +53,6 @@ const Calendar: React.FC = () => {
     const { i18n } = useTranslation()
     const weekdays = constructWeekDays(i18n.language)
     const datesInMonth = constructMonthDays(new Date())
-    const dispatch = useDispatch()
     const [selectedTags, selectTag] = useState<Category[]>([])
     const [eventTags, setEventTags] = useState<Category[]>([])
     const [calendarState, setCalendarState] = useState({
