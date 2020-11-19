@@ -37,6 +37,14 @@ const contextReducer = (state: State, action: Action) => {
     }
 }
 
+const readLocalStorage = (key: string, fallback: string) => {
+    const storage = localStorage.getItem(key)
+    if (storage !== null) {
+        return JSON.parse(storage)
+    }
+    return fallback
+}
+
 const Provider = ({ children }: ProviderProps): JSX.Element => {
     /*
     const theme = localStorage.getItem('theme')
@@ -57,7 +65,7 @@ const Provider = ({ children }: ProviderProps): JSX.Element => {
         )
     const [state, dispatch] = React.useReducer(contextReducer, {
         theme: 'dark',
-        location: JSON.parse(localStorage.getItem('location') || ''),
+        location: readLocalStorage('location', 'Reykjavík'),
         calendar: {
             selectedDate: new Date(0),
             hasSelected: false,

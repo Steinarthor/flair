@@ -6,7 +6,7 @@ export const EVENT = gql`
             id
             title
             host
-            time
+            timestamp
             duration
             category
             location

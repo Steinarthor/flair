@@ -12,7 +12,7 @@ export interface Event {
     id: number
     title: string
     host: string
-    time: string
+    timestamp: string
     duration: number
     category: Category
     location: string

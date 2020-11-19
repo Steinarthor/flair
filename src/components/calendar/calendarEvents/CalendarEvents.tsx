@@ -71,12 +71,15 @@ const CalendarEvents: React.FC<Props> = ({
                             <div className={styles.event}>
                                 <div className={styles.eventTime}>
                                     <span className={styles.time}>
-                                        {format(new Date(event.time), 'H:mm')}
+                                        {format(
+                                            new Date(event.timestamp),
+                                            'H:mm'
+                                        )}
                                     </span>
                                     <span className={styles.duration}>
                                         {format(
                                             addHours(
-                                                new Date(event.time),
+                                                new Date(event.timestamp),
                                                 event.duration
                                             ),
                                             'HH:mm'

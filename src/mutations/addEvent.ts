@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
-export const EVENT_LOCATION = gql`
-    query getEventLocation($location: String) {
-        eventLocation(location: $location) {
+export const ADD_EVENT = gql`
+    mutation addEvent {
+        addEvent {
             id
             title
             host

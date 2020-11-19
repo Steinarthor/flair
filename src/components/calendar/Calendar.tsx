@@ -8,6 +8,8 @@ import {
     sub,
     getYear,
     isSameDay,
+    getMonth,
+    getDate,
 } from 'date-fns'
 import { useQuery } from '@apollo/client'
 import { EVENTS } from '../../queries/events'
@@ -40,11 +42,22 @@ const uniqueTags = (events: Event[]): Category[] => {
 const Calendar: React.FC = () => {
     const context = useContext()
     const dispatch = useDispatch()
+    const datesInMonth = constructMonthDays(new Date())
+    const [calendarState, setCalendarState] = useState({
+        month: new Date(),
+        year: getYear(new Date()),
+        calendarDays: datesInMonth,
+        selectedDate: new Date(),
+        dayInfocus: new Date(),
+    })
     const [filterEventsByTag, toggleEventsByTag] = useState<Event[]>([])
-
     const { loading, error, data } = useQuery(EVENTS, {
-        pollInterval: 500,
-        variables: { location: context.location },
+        //pollInterval: 500,
+        variables: {
+            location: context.location,
+            month: getMonth(calendarState.selectedDate),
+            date: getDate(calendarState.selectedDate),
+        },
         onCompleted: (data) => {
             toggleEventsByTag(data.events)
             setEventTags(uniqueTags(data.events))
@@ -52,16 +65,9 @@ const Calendar: React.FC = () => {
     })
     const { i18n } = useTranslation()
     const weekdays = constructWeekDays(i18n.language)
-    const datesInMonth = constructMonthDays(new Date())
     const [selectedTags, selectTag] = useState<Category[]>([])
     const [eventTags, setEventTags] = useState<Category[]>([])
-    const [calendarState, setCalendarState] = useState({
-        month: new Date(),
-        year: getYear(new Date()),
-        calendarDays: datesInMonth,
-        selectedDate: new Date(0),
-        dayInfocus: new Date(),
-    })
+
     const nextMonth = () => {
         const next = addMonths(calendarState.month, 1)
         setCalendarState({
