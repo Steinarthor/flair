@@ -1,3 +1,5 @@
+import { Attendee } from '../../attendance/types'
+
 export type Category =
     | 'art'
     | 'books'
@@ -16,6 +18,7 @@ export interface Event {
     duration: number
     category: Category
     location: string
+    attending: Attendee[]
 }
 
 export interface Props {

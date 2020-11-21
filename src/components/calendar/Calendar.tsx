@@ -174,7 +174,7 @@ const Calendar: React.FC = () => {
     const { month, year, calendarDays, selectedDate } = calendarState
 
     if (loading) {
-        return <div>...Loading</div>
+        return <div />
     }
 
     if (error) {

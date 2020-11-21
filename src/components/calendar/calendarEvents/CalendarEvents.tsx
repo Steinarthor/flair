@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Input from '../../input/Input'
 import Location from '../../../icons/location_on-24px.svg'
 import Tag from '../../../components/tag/Tag'
+import Attendance from '../../attendance/Attendance'
 import { Link } from '@reach/router'
 import { addHours, format } from 'date-fns'
 import { Event, Category, Props } from './types'
@@ -89,10 +90,6 @@ const CalendarEvents: React.FC<Props> = ({
                                 <div className={styles.eventDetails}>
                                     <span className={styles.eventTitle}>
                                         {event.title}
-                                        <Tag
-                                            category={event.category}
-                                            invert={false}
-                                        />
                                     </span>
                                     <span className={styles.eventHoast}>
                                         {event.host}
@@ -100,7 +97,14 @@ const CalendarEvents: React.FC<Props> = ({
                                     <span className={styles.location}>
                                         <Location /> {event.location}
                                     </span>
+                                    <div className={styles.eventTag}>
+                                        <Tag
+                                            category={event.category}
+                                            invert={false}
+                                        />
+                                    </div>
                                 </div>
+                                <Attendance attendees={event.attending} />
                             </div>
                         </Link>
                     )

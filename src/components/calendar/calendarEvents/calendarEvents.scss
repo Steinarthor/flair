@@ -40,6 +40,7 @@
 
 .event {
     display: flex;
+    justify-content: space-between;
     width: 100%;
     margin-bottom: 20px;
     background-color: $dark;
@@ -49,6 +50,7 @@
 .eventDetails {
     display: flex;
     flex-direction: column;
+    width: 100%;
     padding: 20px;
 }
 
@@ -57,6 +59,13 @@
     align-items: center;
     font-size: 1.2rem;
     font-weight: 900;
+}
+
+.eventTag {
+    margin-top: 10px;
+    span {
+        margin-left: 0;
+    }
 }
 
 .tag {

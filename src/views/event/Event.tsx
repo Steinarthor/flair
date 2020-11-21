@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from '../../components/header/header'
+import Attendance from '../../components/attendance/Attendance'
 import { RouteComponentProps } from '@reach/router'
 import { useQuery } from '@apollo/client'
 import { EVENT } from '../../queries/event'
@@ -34,7 +35,9 @@ const Event: React.FC<RouteComponentProps<routeState>> = (
             <Header />
             <main className={styles.event}>
                 <div>
+                    <Attendance attendees={data.event.attending} />
                     <h1>{data.event.title}</h1>
+                    <div>{data.event.description}</div>
                 </div>
             </main>
         </>

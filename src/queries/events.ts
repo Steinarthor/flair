@@ -10,6 +10,10 @@ export const EVENTS = gql`
             duration
             category
             location
+            attending {
+                id
+                firstName
+            }
         }
     }
 `
