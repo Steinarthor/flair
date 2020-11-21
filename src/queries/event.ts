@@ -11,6 +11,8 @@ export const EVENT = gql`
             category
             location
             description
+            date
+            month
             attending {
                 id
                 firstName

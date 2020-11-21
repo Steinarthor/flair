@@ -27,11 +27,42 @@
 .location {
     position: relative;
     padding-left: 20px;
-    color: $purple;
 
     svg {
         position: absolute;
         left: 0;
         fill: $white;
     }
+}
+
+.locationText {
+    color: $purple;
+}
+
+.timeAndDuration {
+    display: flex;
+    align-items: center;
+}
+
+.duration {
+    padding-left: 10px;
+}
+
+.date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    background-color: $green;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-weight: 900;
+}
+
+.eventDate {
+    font-weight: 300;
+}
+
+.duration {
+    font-weight: 600;
 }
