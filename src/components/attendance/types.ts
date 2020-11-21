@@ -5,4 +5,6 @@ export type Attendee = {
 
 export interface Props {
     attendees: Attendee[]
+    moveLeft: boolean
+    moveRight: boolean
 }

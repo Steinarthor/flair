@@ -14,7 +14,22 @@
     height: 40px;
     border-radius: 50%;
     border: 2px solid $dark;
+}
 
+.attendeesRest {
+    position: relative;
+    right: 4px;
+    background-color: $gray;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 0;
+}
+
+.restLeft {
+    right: 27px;
+}
+
+.right {
     &:nth-of-type(1) {
         position: relative;
         left: 25px;
@@ -37,10 +52,24 @@
     }
 }
 
-.attendeesRest {
-    position: relative;
-    right: 5px;
-    background-color: $gray;
-    font-size: 0.8rem;
-    z-index: 0;
+.left {
+    &:nth-of-type(1) {
+        position: relative;
+        background-color: $purple;
+        z-index: 3;
+    }
+
+    &:nth-of-type(2) {
+        position: relative;
+        right: 10px;
+        background-color: $green;
+        z-index: 2;
+    }
+
+    &:nth-of-type(3) {
+        position: relative;
+        right: 20px;
+        background-color: $darkYellow;
+        z-index: 1;
+    }
 }

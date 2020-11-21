@@ -104,7 +104,11 @@ const CalendarEvents: React.FC<Props> = ({
                                         />
                                     </div>
                                 </div>
-                                <Attendance attendees={event.attending} />
+                                <Attendance
+                                    attendees={event.attending}
+                                    moveLeft={false}
+                                    moveRight={true}
+                                />
                             </div>
                         </Link>
                     )
