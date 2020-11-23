@@ -19,9 +19,15 @@
 }
 
 .description {
-    line-height: 2;
+    line-height: 1.5;
     font-size: 1.2rem;
-    font-weight: 200;
+    font-weight: 300;
+}
+
+.eventLocation {
+    h2 {
+        margin: 1rem 0;
+    }
 }
 
 .location {

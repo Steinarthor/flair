@@ -21,6 +21,10 @@
 
 .filterTags {
     display: flex;
+
+    span {
+        margin-left: 5px;
+    }
 }
 
 .filterBy {

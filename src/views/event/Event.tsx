@@ -48,13 +48,7 @@ const Event: React.FC<RouteComponentProps<routeState>> = (
                         />{' '}
                         <span className={styles.going}>Going</span>
                     </div>
-                    <span className={styles.location}>
-                        <Location />{' '}
-                        <span className={styles.locationText}>
-                            {data.event.location}
-                        </span>{' '}
-                        <Tag category={data.event.category} invert={false} />
-                    </span>
+                    <Tag category={data.event.category} invert={false} />
                     <div className={styles.timeAndDuration}>
                         <div className={styles.date}>
                             <span>
@@ -78,6 +72,15 @@ const Event: React.FC<RouteComponentProps<routeState>> = (
                     <div className={styles.description}>
                         <h3>About this event</h3>
                         {data.event.description}
+                    </div>
+                    <div className={styles.eventLocation}>
+                        <h2>Location</h2>
+                        <span className={styles.location}>
+                            <Location />{' '}
+                            <span className={styles.locationText}>
+                                {data.event.location}
+                            </span>{' '}
+                        </span>
                     </div>
                 </div>
             </main>
