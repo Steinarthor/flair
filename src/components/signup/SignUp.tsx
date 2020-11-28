@@ -1,18 +1,21 @@
 import React, { ChangeEvent, useState } from 'react'
-import { Props, Auth } from './types'
-import Input from '../../input/Input'
-import Button from '../../button/Button'
-import styles from './signup.scss'
+import { useNavigate } from '@reach/router'
+import { Signup } from './types'
+import Input from '../input/Input'
+import Button from '../button/Button'
+import styles from './signUp.scss'
 
-const Signup: React.FC<Props> = ({ callback }: Props) => {
-    const [signupState, setSignupState] = useState<Auth>({
+const SignUp: React.FC = () => {
+    const navigate = useNavigate()
+    const [signupState, setSignupState] = useState<Signup>({
         email: '',
         username: '',
         password: '',
         hasSubmitted: false,
+        message: '',
     })
 
-    const updateLogin = (event: ChangeEvent<HTMLInputElement>) => {
+    const updateSignup = (event: ChangeEvent<HTMLInputElement>) => {
         const newState = {
             ...signupState,
             [event.target.name]: event.target.value,
@@ -30,16 +33,15 @@ const Signup: React.FC<Props> = ({ callback }: Props) => {
 
     return (
         <form onSubmit={submitSignup} className={styles.signup}>
-            <div className={styles.signupTypes}>
-                <h1>Welcome</h1>
-            </div>
+            <h1>Create a user</h1>
+            <span className={styles.error}>{signupState.message}</span>
             <div className={styles.signupInput}>
                 <Input
                     name="email"
                     type="string"
                     required
                     showError={false}
-                    onChange={updateLogin}
+                    onChange={updateSignup}
                     onBlur={onBlur}
                     value={signupState.email}
                     placeholder="Email"
@@ -49,7 +51,7 @@ const Signup: React.FC<Props> = ({ callback }: Props) => {
                     type="string"
                     required
                     showError={false}
-                    onChange={updateLogin}
+                    onChange={updateSignup}
                     onBlur={onBlur}
                     value={signupState.username}
                     placeholder="Username"
@@ -59,14 +61,19 @@ const Signup: React.FC<Props> = ({ callback }: Props) => {
                     type="password"
                     required
                     showError={false}
-                    onChange={updateLogin}
+                    onChange={updateSignup}
                     onBlur={onBlur}
                     value={signupState.password}
                     placeholder="Password"
                 />
-                <button onClick={callback}>
+                <span
+                    onClick={() => navigate('/login', { replace: true })}
+                    onKeyPress={() => navigate('/login', { replace: true })}
+                    role="button"
+                    tabIndex={0}
+                >
                     Already have an account? Sign in
-                </button>
+                </span>
             </div>
             <div className={styles.signupButton}>
                 <Button id="signUpButton" text="Sign up" type="submit" />
@@ -75,4 +82,4 @@ const Signup: React.FC<Props> = ({ callback }: Props) => {
     )
 }
 
-export default Signup
+export default SignUp

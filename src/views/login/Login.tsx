@@ -1,6 +1,6 @@
 import React from 'react'
 import { RouteComponentProps } from '@reach/router'
-import Auth from '../../components/auth/Auth'
+import SignIn from '../../components/signIn/SignIn'
 import Header from '../../components/header/header'
 import styles from './login.scss'
 
@@ -9,7 +9,7 @@ const Login: React.FC<RouteComponentProps> = () => {
         <>
             <Header />
             <main className={styles.login}>
-                <Auth />
+                <SignIn />
             </main>
         </>
     )

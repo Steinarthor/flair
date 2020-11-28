@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .signup {
     display: flex;
     flex-direction: column;
@@ -7,9 +9,7 @@
     max-width: 500px;
     background-color: var(--background-color);
     border-radius: 4px;
-}
 
-.signupTypes {
     h1 {
         font-size: 3rem;
         font-weight: 600;
@@ -34,7 +34,7 @@
         margin-bottom: 10px;
     }
 
-    button {
+    span {
         background-color: transparent;
         border: none;
         color: var(--cta);
@@ -47,4 +47,13 @@
     display: flex;
     justify-content: center;
     margin: 20px 0;
+}
+
+.error {
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: $red;
+    text-align: center;
 }
