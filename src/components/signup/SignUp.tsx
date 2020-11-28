@@ -1,6 +1,9 @@
 import React, { ChangeEvent, useState } from 'react'
 import { useNavigate } from '@reach/router'
 import { Signup } from './types'
+import { SIGNUP } from '../../mutations/signup'
+import { useMutation } from '@apollo/client'
+
 import Input from '../input/Input'
 import Button from '../button/Button'
 import styles from './signUp.scss'
@@ -9,10 +12,19 @@ const SignUp: React.FC = () => {
     const navigate = useNavigate()
     const [signupState, setSignupState] = useState<Signup>({
         email: '',
-        username: '',
         password: '',
         hasSubmitted: false,
         message: '',
+        name: '',
+    })
+
+    const [signup] = useMutation(SIGNUP, {
+        onCompleted: (data) => {
+            console.log('DATA', data)
+        },
+        onError: ({ message }) => {
+            console.log('ERROR', message)
+        },
     })
 
     const updateSignup = (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,9 +38,18 @@ const SignUp: React.FC = () => {
         console.log(event)
     }
 
-    const submitSignup = (event: React.FormEvent<HTMLFormElement>) => {
+    const submitSignup = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         setSignupState((state) => ({ ...state, hasSubmitted: true }))
+        await signup({
+            variables: {
+                input: {
+                    password: signupState.password,
+                    email: signupState.email,
+                    name: signupState.name,
+                },
+            },
+        })
     }
 
     return (
@@ -47,16 +68,6 @@ const SignUp: React.FC = () => {
                     placeholder="Email"
                 />
                 <Input
-                    name="username"
-                    type="string"
-                    required
-                    showError={false}
-                    onChange={updateSignup}
-                    onBlur={onBlur}
-                    value={signupState.username}
-                    placeholder="Username"
-                />
-                <Input
                     name="password"
                     type="password"
                     required
@@ -65,6 +76,16 @@ const SignUp: React.FC = () => {
                     onBlur={onBlur}
                     value={signupState.password}
                     placeholder="Password"
+                />
+                <Input
+                    name="name"
+                    type="string"
+                    required
+                    showError={false}
+                    onChange={updateSignup}
+                    onBlur={onBlur}
+                    value={signupState.name}
+                    placeholder="Name"
                 />
                 <span
                     onClick={() => navigate('/login', { replace: true })}
