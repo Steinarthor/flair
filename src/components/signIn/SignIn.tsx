@@ -9,7 +9,7 @@ import styles from './SignIn.scss'
 
 const SignIn: React.FC = () => {
     const [signInState, setSignInState] = useState<Signin>({
-        username: '',
+        email: '',
         password: '',
         message: '',
     })
@@ -47,7 +47,7 @@ const SignIn: React.FC = () => {
         await signIn({
             variables: {
                 input: {
-                    username: signInState.username,
+                    email: signInState.email,
                     password: signInState.password,
                 },
             },
@@ -60,13 +60,13 @@ const SignIn: React.FC = () => {
             <span className={styles.error}>{signInState.message}</span>
             <div className={styles.signInInput}>
                 <Input
-                    name="username"
+                    name="email"
                     type="string"
                     required
                     showError={false}
                     onChange={updateSignIn}
-                    value={signInState.username}
-                    placeholder="Username"
+                    value={signInState.email}
+                    placeholder="Email"
                 />
                 <Input
                     name="password"

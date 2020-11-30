@@ -14,7 +14,7 @@ export const EVENTS = gql`
             month
             attending {
                 id
-                firstName
+                name
             }
         }
     }
