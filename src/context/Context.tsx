@@ -5,6 +5,7 @@ type Dispatch = (action: Action) => void
 type State = {
     theme: string
     location: string
+    isLoggedIn: boolean
     calendar: { selectedDate: Date; hasSelected: boolean }
 }
 type ProviderProps = { children: React.ReactNode }
@@ -24,6 +25,11 @@ const contextReducer = (state: State, action: Action) => {
                 ...state,
                 location: action.payload.location,
             }
+        case 'SET_LOGGED_IN':
+            return {
+                ...state,
+                isLoggedIn: action.payload.isLoggedIn,
+            }
         case 'SET_SELECTED_DAY':
             return {
                 ...state,
@@ -37,9 +43,9 @@ const contextReducer = (state: State, action: Action) => {
     }
 }
 
-const readLocalStorage = (key: string, fallback: string) => {
+const readLocalStorage = (key: string, fallback: string | boolean) => {
     const storage = localStorage.getItem(key)
-    if (storage !== null) {
+    if (storage && storage !== null) {
         return JSON.parse(storage)
     }
     return fallback
@@ -66,6 +72,7 @@ const Provider = ({ children }: ProviderProps): JSX.Element => {
     const [state, dispatch] = React.useReducer(contextReducer, {
         theme: 'dark',
         location: readLocalStorage('location', 'Reykjavík'),
+        isLoggedIn: Boolean(localStorage.getItem('token')),
         calendar: {
             selectedDate: new Date(0),
             hasSelected: false,

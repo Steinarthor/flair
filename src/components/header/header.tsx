@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from '@reach/router'
 import { useTranslation } from 'react-i18next'
 import { Props } from './types'
+import { useContext } from '../../context/Context'
 import LocationPicker from '../../components/locationPicker/LocationPicker'
 import LangPicker from '../../components/langpicker/LangPicker'
 import ThemeSwitcher from '../../components/themeSwitcher/ThemeSwitcher'
@@ -12,6 +13,8 @@ import styles from './header.scss'
 
 const Header: React.FC<Props> = () => {
     const { t } = useTranslation()
+    const context = useContext()
+    console.log(context.isLoggedIn)
     return (
         <header className={styles.header}>
             <Link to="/" className={styles.title}>
@@ -31,9 +34,15 @@ const Header: React.FC<Props> = () => {
                     {/*<ThemeSwitcher />*/}
                     <NotificationSvg />
                     <MessageSvg />
-                    <Link to="/login" className={styles.login}>
-                        <span>Log in</span>
-                    </Link>
+                    {context.isLoggedIn ? (
+                        <Link to="/dashboard" className={styles.login}>
+                            <ProfileSvg />
+                        </Link>
+                    ) : (
+                        <Link to="/login" className={styles.login}>
+                            <span>Log in</span>
+                        </Link>
+                    )}
                 </div>
             </div>
         </header>

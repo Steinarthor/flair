@@ -3,7 +3,7 @@ import { Redirect } from '@reach/router'
 
 const PrivateRoute = (props: any) => {
     const loggedIn = Boolean(localStorage.getItem('token'))
-    let { as: Comp, ...otherProps } = props
+    const { as: Comp, ...otherProps } = props
 
     return loggedIn ? (
         <Comp {...otherProps} />

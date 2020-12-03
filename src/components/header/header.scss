@@ -52,8 +52,13 @@
 .login {
     margin-left: 5px;
     font-size: 1.4rem;
+    line-height: 1.4rem;
     font-weight: 600;
     text-decoration: none;
     color: var(--color);
     cursor: pointer;
+
+    svg {
+        fill: var(--color);
+    }
 }

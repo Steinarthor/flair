@@ -3,6 +3,7 @@ import { Signin } from './types'
 import { useNavigate } from '@reach/router'
 import { LOGIN } from '../../mutations/login'
 import { useMutation } from '@apollo/client'
+import { useDispatch } from '../../context/Context'
 import Input from '../input/Input'
 import Button from '../button/Button'
 import styles from './SignIn.scss'
@@ -13,11 +14,16 @@ const SignIn: React.FC = () => {
         password: '',
         message: '',
     })
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const [signIn] = useMutation(LOGIN, {
         onCompleted: (data) => {
             if (data.login.status === 201) {
                 localStorage.setItem('token', data.login.token)
+                dispatch({
+                    type: 'SET_LOGGED_IN',
+                    payload: { isLoggedIn: true },
+                })
                 navigate('./dashboard', { replace: true })
             } else {
                 setSignInState((state) => ({
